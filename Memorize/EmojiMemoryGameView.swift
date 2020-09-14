@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Safak Gezer on 8/26/20.
@@ -8,8 +8,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var viewModel: EmojiMemoryGame
+struct EmojiMemoryGameView: View {
+    @ObservedObject var viewModel: EmojiMemoryGame
+    // ^ Tells the view to redraw yourself whenever this object changes
     
     var body: some View {
         HStack() {
@@ -17,7 +18,7 @@ struct ContentView: View {
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
-                .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
+                .aspectRatio(2/3, contentMode: .fit)
             }
         }
         .padding()
@@ -67,6 +68,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }

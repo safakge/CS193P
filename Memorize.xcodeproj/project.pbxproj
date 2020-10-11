@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB159A3A253324A80078FA2B /* Scratch.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB159A39253324A80078FA2B /* Scratch.rtf */; };
+		AB159A3F253324C20078FA2B /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB159A3E253324C20078FA2B /* Notes.rtf */; };
+		AB159A4D2533282F0078FA2B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB159A4C2533282F0078FA2B /* Grid.swift */; };
+		AB159A5825332DAE0078FA2B /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB159A5725332DAE0078FA2B /* GridLayout.swift */; };
+		AB34EF3F2533326000B2BC78 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34EF3E2533326000B2BC78 /* Array+Identifiable.swift */; };
+		ABAD4DA2253343B0006C695C /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD4DA1253343B0006C695C /* Array+Only.swift */; };
 		ABB92A2824F6B70E006AD737 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB92A2724F6B70E006AD737 /* AppDelegate.swift */; };
 		ABB92A2A24F6B70E006AD737 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB92A2924F6B70E006AD737 /* SceneDelegate.swift */; };
 		ABB92A2C24F6B70E006AD737 /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB92A2B24F6B70E006AD737 /* EmojiMemoryGameView.swift */; };
@@ -37,6 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB159A39253324A80078FA2B /* Scratch.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Scratch.rtf; sourceTree = "<group>"; };
+		AB159A3E253324C20078FA2B /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
+		AB159A4C2533282F0078FA2B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		AB159A5725332DAE0078FA2B /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		AB34EF3E2533326000B2BC78 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
+		ABAD4DA1253343B0006C695C /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
 		ABB92A2424F6B70E006AD737 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB92A2724F6B70E006AD737 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABB92A2924F6B70E006AD737 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,8 +95,9 @@
 		ABB92A1B24F6B70E006AD737 = {
 			isa = PBXGroup;
 			children = (
+				AB159A3E253324C20078FA2B /* Notes.rtf */,
+				AB159A39253324A80078FA2B /* Scratch.rtf */,
 				ABB92A2624F6B70E006AD737 /* Memorize */,
-				ABB92A3D24F6B710006AD737 /* MemorizeTests */,
 				ABB92A4824F6B710006AD737 /* MemorizeUITests */,
 				ABB92A2524F6B70E006AD737 /* Products */,
 			);
@@ -103,14 +116,19 @@
 		ABB92A2624F6B70E006AD737 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				ABB92A3524F6B710006AD737 /* Info.plist */,
 				ABB92A2724F6B70E006AD737 /* AppDelegate.swift */,
 				ABB92A2924F6B70E006AD737 /* SceneDelegate.swift */,
 				ABB92A2B24F6B70E006AD737 /* EmojiMemoryGameView.swift */,
+				AB159A4C2533282F0078FA2B /* Grid.swift */,
+				AB34EF3E2533326000B2BC78 /* Array+Identifiable.swift */,
+				ABAD4DA1253343B0006C695C /* Array+Only.swift */,
+				AB159A5725332DAE0078FA2B /* GridLayout.swift */,
 				ABF49CFA24FD033700C551BD /* EmojiMemoryGame.swift */,
 				ABF49CF824FD014800C551BD /* MemoryGame.swift */,
 				ABB92A2D24F6B710006AD737 /* Assets.xcassets */,
 				ABB92A3224F6B710006AD737 /* LaunchScreen.storyboard */,
-				ABB92A3524F6B710006AD737 /* Info.plist */,
+				ABB92A3D24F6B710006AD737 /* MemorizeTests */,
 				ABB92A2F24F6B710006AD737 /* Preview Content */,
 			);
 			path = Memorize;
@@ -205,7 +223,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Safak Gezer";
 				TargetAttributes = {
 					ABB92A2324F6B70E006AD737 = {
@@ -246,8 +264,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB159A3F253324C20078FA2B /* Notes.rtf in Resources */,
 				ABB92A3424F6B710006AD737 /* LaunchScreen.storyboard in Resources */,
 				ABB92A3124F6B710006AD737 /* Preview Assets.xcassets in Resources */,
+				AB159A3A253324A80078FA2B /* Scratch.rtf in Resources */,
 				ABB92A2E24F6B710006AD737 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,8 +295,12 @@
 			files = (
 				ABB92A2824F6B70E006AD737 /* AppDelegate.swift in Sources */,
 				ABB92A2A24F6B70E006AD737 /* SceneDelegate.swift in Sources */,
+				AB159A4D2533282F0078FA2B /* Grid.swift in Sources */,
+				ABAD4DA2253343B0006C695C /* Array+Only.swift in Sources */,
 				ABF49CF924FD014800C551BD /* MemoryGame.swift in Sources */,
 				ABB92A2C24F6B70E006AD737 /* EmojiMemoryGameView.swift in Sources */,
+				AB34EF3F2533326000B2BC78 /* Array+Identifiable.swift in Sources */,
+				AB159A5825332DAE0078FA2B /* GridLayout.swift in Sources */,
 				ABF49CFB24FD033700C551BD /* EmojiMemoryGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +374,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -410,6 +435,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

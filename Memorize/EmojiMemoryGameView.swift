@@ -13,17 +13,14 @@ struct EmojiMemoryGameView: View {
     // ^ Tells the view to redraw yourself whenever this object changes
     
     var body: some View {
-        HStack() {
-            ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
-                }
-                .aspectRatio(2/3, contentMode: .fit)
+        Grid(viewModel.cards) { card in
+            CardView(card: card).onTapGesture {
+                self.viewModel.choose(card: card)
             }
+            .padding()
         }
         .padding()
         .foregroundColor(Color.orange)
-        .font(viewModel.cards.count >= 5 ? Font.title : Font.largeTitle)
     }
 }
 
@@ -37,13 +34,15 @@ struct CardView: View {
     }
     
     func body(for size: CGSize) -> some View {
-        ZStack() {
+        ZStack {
             if self.card.isFaceUp {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                 Text(self.card.content)
             } else {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
+                if !card.isMatched {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
         }
         .font(Font.system(size: fontSize(for: size)))
@@ -85,6 +84,9 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+        Group {
+            EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+                .previewDevice("iPhone 11")
+        }
     }
 }

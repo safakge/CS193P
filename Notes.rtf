@@ -31,4 +31,13 @@ enum Optional<T> \{\
 	case some(T)\
 \}\
 \
-* Group is a ViewBuilder. XStacks are ViewBuilders}
+* Group is a ViewBuilder. XStacks are ViewBuilders\
+\
+@ViewBuilder\
+apply to a \ul \ulc0 function or read-only computer var or a parameter that returns a View\ulnone  that return something that conforms to View. It will return by interpreting the contents as a list of Views and combine them into one. \
+-That one View that it combines it into might be a TupleView (for 2 to 10 Views)\
+-Or it could be a _ConditionalContent View (if there's an if-else in the function)\
+-Or EmptyView (if there's nothing at all)\
+-OR any combination of the above\
+\
+}

@@ -116,18 +116,18 @@
 		ABB92A2624F6B70E006AD737 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
-				ABB92A3524F6B710006AD737 /* Info.plist */,
-				ABB92A2724F6B70E006AD737 /* AppDelegate.swift */,
-				ABB92A2924F6B70E006AD737 /* SceneDelegate.swift */,
 				ABB92A2B24F6B70E006AD737 /* EmojiMemoryGameView.swift */,
+				ABF49CFA24FD033700C551BD /* EmojiMemoryGame.swift */,
+				ABF49CF824FD014800C551BD /* MemoryGame.swift */,
 				AB159A4C2533282F0078FA2B /* Grid.swift */,
 				AB34EF3E2533326000B2BC78 /* Array+Identifiable.swift */,
 				ABAD4DA1253343B0006C695C /* Array+Only.swift */,
 				AB159A5725332DAE0078FA2B /* GridLayout.swift */,
-				ABF49CFA24FD033700C551BD /* EmojiMemoryGame.swift */,
-				ABF49CF824FD014800C551BD /* MemoryGame.swift */,
 				ABB92A2D24F6B710006AD737 /* Assets.xcassets */,
 				ABB92A3224F6B710006AD737 /* LaunchScreen.storyboard */,
+				ABB92A3524F6B710006AD737 /* Info.plist */,
+				ABB92A2724F6B70E006AD737 /* AppDelegate.swift */,
+				ABB92A2924F6B70E006AD737 /* SceneDelegate.swift */,
 				ABB92A3D24F6B710006AD737 /* MemorizeTests */,
 				ABB92A2F24F6B710006AD737 /* Preview Content */,
 			);

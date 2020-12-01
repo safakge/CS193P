@@ -13,14 +13,19 @@ struct EmojiMemoryGameView: View {
     // ^ Tells the view to redraw yourself whenever this object changes
     
     var body: some View {
-        Grid(viewModel.cards) { card in
-            CardView(card: card).onTapGesture {
-                self.viewModel.choose(card: card)
+        VStack {
+            Grid(viewModel.cards) { card in
+                CardView(card: card).onTapGesture {
+                    self.viewModel.choose(card: card)
+                }
+                    .padding()
             }
-            .padding()
+                .padding()
+                .foregroundColor(Color.orange)
+            Button(action: {
+                viewModel.resetGame()
+            }, label: { Text("New Game") })
         }
-        .padding()
-        .foregroundColor(Color.orange)
     }
 }
 

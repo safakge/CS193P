@@ -88,7 +88,7 @@ A Shape or ViewModifier lets the animation system know what information it wants
 The animation system then tells the Shape/VM the current piece it should show.
 Shapes/VMs that want to be animatable must implement `Animatable`. Which is a single var `animatableData: Type`
 
-
+Protocol `AnimatableModifier` = `ViewModifier, Animatable` 
 
 
 

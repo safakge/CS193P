@@ -53,17 +53,7 @@ struct CardView: View {
                     .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .cardify(isFaceUp: card.isFaceUp)
-            .transition(AnyTransition.scale) // for when cards appear/disappear after being matched
-            .rotation3DEffect(
-                Angle.degrees(card.isFaceUp ? 0 : 180),
-                axis: (x: 0, y: 1, z: 0)
-                )
-            
-            // LEFT AT 58:19
-            
-            
-            
-            
+            .transition(AnyTransition.scale) // for when cards disappear after being matched
         }
     }
     

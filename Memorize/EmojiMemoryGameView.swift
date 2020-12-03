@@ -57,7 +57,17 @@ struct CardView: View {
     private func body(for size: CGSize) -> some View {
         if card.isFaceUp || !card.isMatched {
             ZStack {
-                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusRemaining*360-90), clockwise: true)
+                Group {
+                    // Card's body method now starts the bonus timer with the call to startBonusTimeAnimation added on its onAppear callback, if it's found to be in a state of isConsumingBonusTime=true. Also in the same case, it sets the angle of the pie to the animatedBonusRemaining @State var. It will update its angle when the startBonusTimeAnimation's withAnimation block updates the animatedBonusRemaining towards 0
+                    if card.isConsumingBonusTime {
+                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
+                            .onAppear {
+                                self.startBonusTimeAnimation()
+                            }
+                    } else {
+                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusRemaining*360-90), clockwise: true)
+                    }
+                }
                     .padding(5).opacity(0.4)
                 Text(self.card.content)
                     .font(Font.system(size: fontSize(for: size)))

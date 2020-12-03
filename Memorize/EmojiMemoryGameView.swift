@@ -42,6 +42,17 @@ struct CardView: View {
         }
     }
     
+    @State private var animatedBonusRemaining: Double = 0
+//   ^ SwiftUI manages the storage of any property you declare as a @State. When the state value changes, *the view invalidates its appearance and recomputes the body.* Use the state as the single source of truth for a given view.
+//    A State instance isn’t the value itself; it’s a means of reading and writing the value. To access a state’s underlying value, use its variable name, which returns the wrappedValue property value.
+    
+    private func startBonusTimeAnimation() {
+        animatedBonusRemaining = card.bonusRemaining
+        withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+            animatedBonusRemaining = 0
+        }
+    }
+    
     @ViewBuilder
     private func body(for size: CGSize) -> some View {
         if card.isFaceUp || !card.isMatched {

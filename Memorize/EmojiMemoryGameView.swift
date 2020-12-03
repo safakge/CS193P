@@ -46,7 +46,7 @@ struct CardView: View {
     private func body(for size: CGSize) -> some View {
         if card.isFaceUp || !card.isMatched {
             ZStack {
-                Pie(startAngle: Angle.degrees(0 - 90), endAngle: Angle.degrees(10 - 90), clockwise: true).padding(5).opacity(0.4)
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
                 Text(self.card.content)
                     .font(Font.system(size: fontSize(for: size)))
                     .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0)) // do a somersault when matched

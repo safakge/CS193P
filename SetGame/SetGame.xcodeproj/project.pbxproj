@@ -13,6 +13,8 @@
 		AB33879925792303005911A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB33879825792303005911A4 /* Preview Assets.xcassets */; };
 		AB3387A425792303005911A4 /* SetGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387A325792303005911A4 /* SetGameTests.swift */; };
 		AB3387AF25792303005911A4 /* SetGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387AE25792303005911A4 /* SetGameUITests.swift */; };
+		AB3387C1257BD563005911A4 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387BF257BD562005911A4 /* GridLayout.swift */; };
+		AB3387C2257BD563005911A4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387C0257BD563005911A4 /* Grid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		AB3387AA25792303005911A4 /* SetGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3387AE25792303005911A4 /* SetGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameUITests.swift; sourceTree = "<group>"; };
 		AB3387B025792303005911A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB3387BF257BD562005911A4 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		AB3387C0257BD563005911A4 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 		AB33879025792301005911A4 /* SetGame */ = {
 			isa = PBXGroup;
 			children = (
+				AB3387C0257BD563005911A4 /* Grid.swift */,
+				AB3387BF257BD562005911A4 /* GridLayout.swift */,
 				AB33879125792301005911A4 /* SetGameApp.swift */,
 				AB33879325792301005911A4 /* ContentView.swift */,
 				AB33879525792303005911A4 /* Assets.xcassets */,
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3387C1257BD563005911A4 /* GridLayout.swift in Sources */,
 				AB33879425792301005911A4 /* ContentView.swift in Sources */,
 				AB33879225792301005911A4 /* SetGameApp.swift in Sources */,
+				AB3387C2257BD563005911A4 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

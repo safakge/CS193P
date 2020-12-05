@@ -30,7 +30,7 @@ struct Grid<Item, ItemView>: View where Item:Identifiable, ItemView:View  {
     }
     
     private func body(for item: Item, in layout:GridLayout) -> some View {
-        let index = self.items.firstIndex(matching: item)!
+        let index = try! self.items.firstIndex(where: item as! (Item) throws -> Bool)!
         return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
             .position(layout.location(ofItemAt: index))

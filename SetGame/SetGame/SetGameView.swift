@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct SetGameView: View {
+    @ObservedObject var modelView: SetGame
+    
     var body: some View {
-        
-        Text("Hello, world!")
-            .padding()
+        Grid(modelView.cards) { card in
+            Text(card.content)
+                .cardify(isFaceUp: true)
+                .padding()
+        }
     }
 }
 
@@ -37,6 +41,7 @@ struct CardView: View {
 
 struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
-        SetGameView()
+        let modelView = SetGame()
+        SetGameView(modelView: modelView)
     }
 }

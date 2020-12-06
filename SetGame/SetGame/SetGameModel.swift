@@ -14,7 +14,7 @@ struct SetGameModel {
     init() {
         cards = []
         for index in 0..<64 {
-            let card = Card(content: index.description, id: index)
+            let card = Card(content: (index+1).description, id: index)
             cards.append(card)
         }
     }

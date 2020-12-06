@@ -12,19 +12,22 @@ struct SetGameView: View {
     
     var body: some View {
         Grid(modelView.cards) { card in
-            Text(card.content)
-                .cardify(isFaceUp: true)
-                .padding()
+            CardView(card: card)
         }
+        .foregroundColor(.orange)
     }
 }
 
 
-
 struct CardView: View {
+    var card:SetGameModel.Card
     
     var body: some View {
-        Text("Card")
+        Text(card.content)
+            .bold()
+            .underline()
+            .cardify(isFaceUp: true)
+            .padding(5)
     }
 }
 

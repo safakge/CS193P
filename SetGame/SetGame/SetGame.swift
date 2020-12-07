@@ -26,4 +26,8 @@ class SetGame : ObservableObject {
     func dealCards() {
         model.dealCards()
     }
+    
+    func choose(card:SetGameModel.Card) {
+        model.choose(card: card)
+    }
 }

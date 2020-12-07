@@ -14,8 +14,10 @@ struct SetGameView: View {
         VStack {
             Grid(modelView.dealtCards) { card in
                 CardView(card: card)
+                    .onTapGesture {
+                        modelView.choose(card: card)
+                    }
             }
-            .foregroundColor(.orange)
             Button(action: {
                 modelView.dealCards()
             }, label: { Text("Deal Cards") })
@@ -32,6 +34,7 @@ struct CardView: View {
             .font(.headline)
             .cardify(isFaceUp: true)
             .padding(5)
+            .foregroundColor(card.chosen ? .orange : .gray)
     }
 }
 
@@ -50,6 +53,7 @@ struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
         let modelView = SetGame()
         modelView.dealCards()
+        modelView.choose(card: modelView.dealtCards.first!)
         return SetGameView(modelView: modelView)
     }
 }

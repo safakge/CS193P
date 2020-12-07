@@ -28,6 +28,13 @@ struct SetGameModel {
         deck.shuffle()
     }
     
+    mutating func choose(card:Card) {
+        if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
+            dealtCards[chosenIndex].chosen = true
+        }
+        // TODO more rules for choosing
+    }
+    
     mutating func dealCards() {
         while dealtCards.count < 12 {
             let card = deck.removeLast();
@@ -38,6 +45,8 @@ struct SetGameModel {
     }
     
     struct Card: Identifiable {
+        var chosen:Bool = false
+        
         let numberOfSymbols:Int
         let shape:CardShape
         let shading:CardShading
@@ -58,3 +67,26 @@ struct SetGameModel {
         }
     }
 }
+
+
+
+
+
+
+//    A set consists of three cards satisfying all of these conditions:
+//
+//    They all have the same number or have three different numbers.
+//    They all have the same shape or have three different shapes.
+//    They all have the same shading or have three different shadings.
+//    They all have the same color or have three different colors.
+//    The rules of Set are summarized by: If you can sort a group of three cards into "two of ____ and one of ____", then it is not a set.
+//
+//    For example, these three cards form a set:
+//
+//    One red striped diamond
+//    Two red solid diamonds
+//    Three red open diamonds
+//    Given any two cards from the deck, there is one and only one other cards that form a set with them.
+//func cardsDoFormSet(cardOne:Card, cardTwo:Card, cardThree:Card) -> Bool {
+//    return false // TODO
+//}

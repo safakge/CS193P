@@ -23,9 +23,8 @@ struct CardView: View {
     var card:SetGameModel.Card
     
     var body: some View {
-        Text(card.content)
-            .bold()
-            .underline()
+        Text("\(card.id)")
+            .font(.headline)
             .cardify(isFaceUp: true)
             .padding(5)
     }

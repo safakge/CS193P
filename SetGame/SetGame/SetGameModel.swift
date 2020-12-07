@@ -13,15 +13,38 @@ struct SetGameModel {
     
     init() {
         cards = []
-        for index in 0..<64 {
-            let card = Card(content: (index+1).description, id: index)
-            cards.append(card)
+        for number in 1...3 {
+            for shape in Card.CardShape.allCases {
+                for shading in Card.CardShading.allCases {
+                    for color in Card.CardColor.allCases {
+                        let card = Card(numberOfSymbols: number, shape: shape, shading: shading, color: color)
+                        cards.append(card)
+                    }
+                }
+            }
         }
+//        cards.shuffle()
     }
     
     
     struct Card: Identifiable {
-        let content: String
-        let id: Int
+        enum CardShape: Int, CaseIterable {
+            case One = 1, Two = 2, Three = 3
+        }
+        enum CardShading: Int, CaseIterable {
+            case One = 1, Two = 2, Three = 3
+        }
+        enum CardColor: Int, CaseIterable {
+            case One = 1, Two = 2, Three = 3
+        }
+        
+        let numberOfSymbols:Int
+        let shape:CardShape
+        let shading:CardShading
+        let color:CardColor
+        
+        var id: Int {
+            return numberOfSymbols*1000 + shape.rawValue*100 + shading.rawValue*10 + color.rawValue
+        }
     }
 }

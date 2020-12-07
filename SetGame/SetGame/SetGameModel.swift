@@ -56,7 +56,7 @@ struct SetGameModel {
         print("dealCards() deck: \(deck.count), dealt: \(dealtCards.count)")
     }
     
-    struct Card: Identifiable {
+    struct Card: Identifiable, CustomStringConvertible {
         var chosen:Bool = false
         
         let numberOfSymbols:Int
@@ -66,6 +66,10 @@ struct SetGameModel {
         
         var id: Int {
             return numberOfSymbols*1000 + shape.rawValue*100 + shading.rawValue*10 + color.rawValue
+        }
+        
+        var description: String {
+            return "\(id)"
         }
         
         enum CardShape: Int, CaseIterable {

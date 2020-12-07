@@ -11,6 +11,11 @@ import Foundation
 struct SetGameModel {
     private(set) var deck: [Card]
     private(set) var dealtCards:[Card]
+    var chosenCards:[Card] {
+        return dealtCards.filter { (card:Card) -> Bool in
+            return card.chosen
+        }
+    }
     
     init() {
         deck = []
@@ -30,11 +35,16 @@ struct SetGameModel {
     
     mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
+            let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
+            if choosing && self.chosenCards.count == 3 {
+                // already chosen three cards, and can't choose more
+                return
+            }
             dealtCards[chosenIndex].chosen = !dealtCards[chosenIndex].chosen
         } else {
-            fatalError("toggleChosen called for undealtCard")
+            fatalError("toggleChosen called for undealtCard. Fatal.")
         }
-        // TODO more rules for choosing
+        print("Cards currently chosen are: \(self.chosenCards)")
     }
     
     mutating func dealCards() {
@@ -67,6 +77,8 @@ struct SetGameModel {
         enum CardColor: Int, CaseIterable {
             case One = 1, Two = 2, Three = 3
         }
+        
+        
     }
 }
 

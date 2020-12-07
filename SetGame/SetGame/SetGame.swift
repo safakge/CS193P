@@ -9,15 +9,21 @@ import Foundation
 
 
 class SetGame : ObservableObject {
-    var model = createSetGameModel()
+    @Published var model = createSetGameModel()
     
-    var cards: [SetGameModel.Card] {
+    var dealtCards: [SetGameModel.Card] {
         get {
-            return model.cards
+            return model.dealtCards
         }
     }
     
     private static func createSetGameModel() -> SetGameModel {
         return SetGameModel()
+    }
+    
+    // Intents
+    
+    func dealCards() {
+        model.dealCards()
     }
 }

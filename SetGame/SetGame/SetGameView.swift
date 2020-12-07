@@ -11,10 +11,15 @@ struct SetGameView: View {
     @ObservedObject var modelView: SetGame
     
     var body: some View {
-        Grid(modelView.cards) { card in
-            CardView(card: card)
+        VStack {
+            Grid(modelView.dealtCards) { card in
+                CardView(card: card)
+            }
+            .foregroundColor(.orange)
+            Button(action: {
+                modelView.dealCards()
+            }, label: { Text("Deal Cards") })
         }
-        .foregroundColor(.orange)
     }
 }
 
@@ -44,6 +49,7 @@ struct CardView: View {
 struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
         let modelView = SetGame()
-        SetGameView(modelView: modelView)
+        modelView.dealCards()
+        return SetGameView(modelView: modelView)
     }
 }

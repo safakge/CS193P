@@ -28,9 +28,11 @@ struct SetGameModel {
         deck.shuffle()
     }
     
-    mutating func choose(card:Card) {
+    mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
-            dealtCards[chosenIndex].chosen = true
+            dealtCards[chosenIndex].chosen = !dealtCards[chosenIndex].chosen
+        } else {
+            fatalError("toggleChosen called for undealtCard")
         }
         // TODO more rules for choosing
     }

@@ -28,6 +28,6 @@ class SetGame : ObservableObject {
     }
     
     func choose(card:SetGameModel.Card) {
-        model.choose(card: card)
+        model.toggleChosen(forCard: card)
     }
 }

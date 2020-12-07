@@ -33,6 +33,32 @@ struct SetGameModel {
         deck.shuffle()
     }
     
+    //    A set consists of three cards satisfying all of these conditions:
+    //
+    //    They all have the same number or have three different numbers.
+    //    They all have the same shape or have three different shapes.
+    //    They all have the same shading or have three different shadings.
+    //    They all have the same color or have three different colors.
+    //    The rules of Set are summarized by: If you can sort a group of three cards into "two of ____ and one of ____", then it is not a set.
+    //
+    //    For example, these three cards form a set:
+    //
+    //    One red striped diamond
+    //    Two red solid diamonds
+    //    Three red open diamonds
+    //    Given any two cards from the deck, there is one and only one other cards that form a set with them.
+    func setFormedWithChosenCards() -> Bool {
+        if chosenCards.count == 3 {
+            var commonFeaturesAmongCards = 0
+            
+            // TODO
+            
+            return commonFeaturesAmongCards == 1
+        }
+        
+        return false
+    }
+    
     mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
             let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
@@ -81,30 +107,5 @@ struct SetGameModel {
         enum CardColor: Int, CaseIterable {
             case One = 1, Two = 2, Three = 3
         }
-        
-        
     }
 }
-
-
-
-
-
-
-//    A set consists of three cards satisfying all of these conditions:
-//
-//    They all have the same number or have three different numbers.
-//    They all have the same shape or have three different shapes.
-//    They all have the same shading or have three different shadings.
-//    They all have the same color or have three different colors.
-//    The rules of Set are summarized by: If you can sort a group of three cards into "two of ____ and one of ____", then it is not a set.
-//
-//    For example, these three cards form a set:
-//
-//    One red striped diamond
-//    Two red solid diamonds
-//    Three red open diamonds
-//    Given any two cards from the deck, there is one and only one other cards that form a set with them.
-//func cardsDoFormSet(cardOne:Card, cardTwo:Card, cardThree:Card) -> Bool {
-//    return false // TODO
-//}

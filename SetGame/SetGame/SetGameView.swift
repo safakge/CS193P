@@ -15,7 +15,9 @@ struct SetGameView: View {
             Grid(modelView.dealtCards) { card in
                 CardView(card: card)
                     .onTapGesture {
-                        modelView.choose(card: card)
+                        withAnimation {
+                            modelView.choose(card: card)
+                        }
                     }
             }
             Button(action: {
@@ -30,20 +32,25 @@ struct CardView: View {
     var card:SetGame.Card
     
     var body: some View {
-        VStack {
+        GeometryReader { metrics in
             VStack {
-                SquiggleShape()
-                DiamondShape()
-                OvalShape()
-            }.foregroundColor(.red)
-            Text("\(card.id)")
-                .font(.headline)
-                .foregroundColor(.black)
+                VStack {
+                    SquiggleShape()
+                    DiamondShape()
+                    OvalShape()
+                }
+                .foregroundColor(.green)
+                .padding(EdgeInsets(top: metrics.size.height * 0.1, leading: metrics.size.width * 0.1, bottom: metrics.size.height * 0.1, trailing: metrics.size.width * 0.1))
+                Text("\(card.id)")
+                    .font(.headline)
+                    .foregroundColor(.black)
+            }
+            .cardify(isFaceUp: true)
+            .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
+            .padding(metrics.size.width * 0.15)
+            .foregroundColor(card.chosen ? .orange : .gray)
         }
-        .padding(20)
-        .cardify(isFaceUp: true)
-        .padding(card.chosen ? 10 : 20)
-        .foregroundColor(card.chosen ? .orange : .gray)
+        
     }
 }
 

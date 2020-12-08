@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct SetGameApp: App {
     var body: some Scene {
-        let modelView = SetGame()
+        let modelView = ShapedSetGame()
         
         return WindowGroup {
             SetGameView(modelView: modelView)

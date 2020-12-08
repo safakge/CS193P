@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SetGameView.swift
 //  SetGame
 //
 //  Created by Safak Gezer on 12/3/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SetGameView: View {
-    @ObservedObject var modelView: SetGame
+    @ObservedObject var modelView: ShapedSetGame
     
     var body: some View {
         VStack {
@@ -27,7 +27,7 @@ struct SetGameView: View {
 
 
 struct CardView: View {
-    var card:SetGameModel.Card
+    var card:SetGame.Card
     
     var body: some View {
         Text("\(card.id)")
@@ -51,7 +51,7 @@ struct CardView: View {
 
 struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
-        let modelView = SetGame()
+        let modelView = ShapedSetGame()
         modelView.dealCards()
         modelView.choose(card: modelView.dealtCards.first!)
         return SetGameView(modelView: modelView)

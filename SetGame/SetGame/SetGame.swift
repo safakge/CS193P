@@ -47,16 +47,22 @@ struct SetGame {
     //    Two red solid diamonds
     //    Three red open diamonds
     //    Given any two cards from the deck, there is one and only one other cards that form a set with them.
+    
+//    For any "set", the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different; or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different. (It cannot break down as 4 features the same + 0 different as the cards would be identical, and there are no identical cards in the Set deck.)
+
     func setFormedWithChosenCards() -> Bool {
         if chosenCards.count == 3 {
             var commonFeaturesAmongCards = 0
-            
-            // TODO
             
             return commonFeaturesAmongCards == 1
         }
         
         return false
+    }
+    
+    func checkForSet() {
+        let setFormed = setFormedWithChosenCards()
+        print("Checking for set... \(setFormed ? "YES." : "No.")")
     }
     
     mutating func toggleChosen(forCard card:Card) {
@@ -71,6 +77,10 @@ struct SetGame {
             fatalError("toggleChosen called for undealtCard. Fatal.")
         }
         print("Cards currently chosen are: \(self.chosenCards)")
+        
+        if chosenCards.count == 3 {
+            checkForSet()
+        }
     }
     
     mutating func dealCards() {

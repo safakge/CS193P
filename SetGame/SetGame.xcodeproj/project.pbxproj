@@ -18,6 +18,7 @@
 		AB3387C7257BD797005911A4 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387C6257BD797005911A4 /* SetGame.swift */; };
 		AB3387CC257BD81E005911A4 /* ShapedSetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387CB257BD81E005911A4 /* ShapedSetGame.swift */; };
 		AB3387E1257BD964005911A4 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387E0257BD964005911A4 /* Cardify.swift */; };
+		AB3C2860257F62A500615B05 /* CardShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C285F257F62A500615B05 /* CardShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		AB3387C6257BD797005911A4 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		AB3387CB257BD81E005911A4 /* ShapedSetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapedSetGame.swift; sourceTree = "<group>"; };
 		AB3387E0257BD964005911A4 /* Cardify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
+		AB3C285F257F62A500615B05 /* CardShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				AB33879325792301005911A4 /* SetGameView.swift */,
 				AB3387CB257BD81E005911A4 /* ShapedSetGame.swift */,
 				AB3387C6257BD797005911A4 /* SetGame.swift */,
+				AB3C285E257F629900615B05 /* Shapes */,
 				AB33879525792303005911A4 /* Assets.xcassets */,
 				AB33879A25792303005911A4 /* Info.plist */,
 				AB33879725792303005911A4 /* Preview Content */,
@@ -151,6 +154,14 @@
 				AB3387BF257BD562005911A4 /* GridLayout.swift */,
 			);
 			path = Blocks;
+			sourceTree = "<group>";
+		};
+		AB3C285E257F629900615B05 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				AB3C285F257F62A500615B05 /* CardShape.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +298,7 @@
 				AB33879425792301005911A4 /* SetGameView.swift in Sources */,
 				AB3387C7257BD797005911A4 /* SetGame.swift in Sources */,
 				AB33879225792301005911A4 /* SetGameApp.swift in Sources */,
+				AB3C2860257F62A500615B05 /* CardShape.swift in Sources */,
 				AB3387C2257BD563005911A4 /* Grid.swift in Sources */,
 				AB3387CC257BD81E005911A4 /* ShapedSetGame.swift in Sources */,
 			);

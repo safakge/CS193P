@@ -30,11 +30,20 @@ struct CardView: View {
     var card:SetGame.Card
     
     var body: some View {
-        Text("\(card.id)")
-            .font(.headline)
-            .cardify(isFaceUp: true)
-            .padding(5)
-            .foregroundColor(card.chosen ? .orange : .gray)
+        VStack {
+            VStack {
+                SquiggleShape()
+                DiamondShape()
+                OvalShape()
+            }.foregroundColor(.red)
+            Text("\(card.id)")
+                .font(.headline)
+                .foregroundColor(.black)
+        }
+        .padding(20)
+        .cardify(isFaceUp: true)
+        .padding(card.chosen ? 10 : 20)
+        .foregroundColor(card.chosen ? .orange : .gray)
     }
 }
 

@@ -11,10 +11,11 @@ import Foundation
 struct SetGame {
     private(set) var deck: [Card]
     private(set) var dealtCards:[Card]
-    var chosenCards:[Card] {
-        return dealtCards.filter { (card:Card) -> Bool in
-            return card.chosen
-        }
+    var chosenCardIndices:[Int] {
+        return dealtCards.enumerated().filter {
+            (member:EnumeratedSequence<[Card]>.Iterator.Element) -> Bool in
+            return member.element.chosen
+        }.map({ $0.offset })
     }
     
     init() {
@@ -51,7 +52,7 @@ struct SetGame {
 //    For any "set", the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different; or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different. (It cannot break down as 4 features the same + 0 different as the cards would be identical, and there are no identical cards in the Set deck.)
 
     func setFormedWithChosenCards() -> Bool {
-        if chosenCards.count == 3 {
+        if chosenCardIndices.count == 3 {
             var commonFeaturesAmongCards = 0
             
             return commonFeaturesAmongCards == 1
@@ -68,7 +69,7 @@ struct SetGame {
     mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
             let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
-            if choosing && self.chosenCards.count == 3 {
+            if choosing && self.chosenCardIndices.count == 3 {
                 // already chosen three cards, and can't choose more
                 return
             }
@@ -76,9 +77,9 @@ struct SetGame {
         } else {
             fatalError("toggleChosen called for undealtCard. Fatal.")
         }
-        print("Cards currently chosen are: \(self.chosenCards)")
+        print("chosenCardIndices: \(self.chosenCardIndices)")
         
-        if chosenCards.count == 3 {
+        if chosenCardIndices.count == 3 {
             checkForSet()
         }
     }

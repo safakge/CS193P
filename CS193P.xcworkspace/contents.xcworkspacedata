@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Memorize/../MyPlayground.playground">
+   </FileRef>
+   <FileRef
       location = "group:SetGame/SetGame.xcodeproj">
    </FileRef>
    <FileRef

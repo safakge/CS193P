@@ -46,7 +46,6 @@
 		AB159A4C2533282F0078FA2B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		AB159A5725332DAE0078FA2B /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		AB2E58B825713EE8008BCABB /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
-		AB2E58CE25763F00008BCABB /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AB2E58DB25764C32008BCABB /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		AB34EF3E2533326000B2BC78 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		AB69966C25654EDA00FEBA78 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
@@ -98,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				AB2E58DB25764C32008BCABB /* Notes.md */,
-				AB2E58CE25763F00008BCABB /* MyPlayground.playground */,
 				ABB92A2624F6B70E006AD737 /* Memorize */,
 				ABB92A4824F6B710006AD737 /* MemorizeUITests */,
 				ABB92A2524F6B70E006AD737 /* Products */,

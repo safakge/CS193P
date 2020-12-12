@@ -20,9 +20,15 @@ struct SetGameView: View {
                         }
                     }
             }
-            Button(action: {
-                modelView.dealCards()
-            }, label: { Text("Deal Cards") })
+            HStack {
+                Button(action: {
+                    modelView.intentDealCards()
+                }, label: { Text("Deal Cards") })
+                Button(action: {
+                    modelView.intentShuffleCardsBack()
+                }, label: { Text("Shuffle Back") })
+            }
+            .font(.headline)
         }
     }
 }
@@ -64,7 +70,7 @@ struct CardView: View {
 struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
         let modelView = ShapedSetGame()
-        modelView.dealCards()
+        modelView.intentDealCards()
         modelView.choose(card: modelView.dealtCards.first!)
         return SetGameView(modelView: modelView)
     }

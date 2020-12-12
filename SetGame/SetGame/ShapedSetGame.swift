@@ -23,8 +23,12 @@ class ShapedSetGame : ObservableObject {
     
     // Intents
     
-    func dealCards() {
+    func intentDealCards() {
         model.dealCards()
+    }
+    
+    func intentShuffleCardsBack() {
+        model.resetDeck()
     }
     
     func choose(card:SetGame.Card) {

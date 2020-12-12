@@ -35,15 +35,11 @@ struct CardView: View {
         GeometryReader { metrics in
             VStack {
                 VStack {
-                    SquiggleShape()
-                    DiamondShape()
-                    OvalShape()
+                    Text("\(card.description)")
+                        .font(.title3)
                 }
-                .foregroundColor(.green)
+                .foregroundColor(.black)
                 .padding(EdgeInsets(top: metrics.size.height * 0.1, leading: metrics.size.width * 0.1, bottom: metrics.size.height * 0.1, trailing: metrics.size.width * 0.1))
-                Text("\(card.id)")
-                    .font(.headline)
-                    .foregroundColor(.black)
             }
             .cardify(isFaceUp: true)
             .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)

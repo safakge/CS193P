@@ -101,7 +101,7 @@ struct SetGame {
         }
         
         var description: String {
-            return "\(id)"
+            return "n: \(numberOfSymbols)\ns: \(shape.rawValue)\nh: \(shading.rawValue)\nc: \(color.rawValue)"
         }
         
         enum CardShape: Int, CaseIterable {

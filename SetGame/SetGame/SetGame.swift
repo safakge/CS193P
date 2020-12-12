@@ -101,7 +101,17 @@ struct SetGame {
         }
     }
     
+    mutating func resetDeck() {
+        if dealtCards.count > 0 {
+            deck.append(contentsOf: dealtCards)
+            dealtCards.removeAll()
+        }
+        deck.shuffle()
+    }
+    
     mutating func dealCards() {
+        resetDeck()
+        
         while dealtCards.count < 12 {
             let card = deck.removeLast()
             dealtCards.append(card)

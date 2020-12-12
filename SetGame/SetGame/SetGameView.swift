@@ -35,7 +35,7 @@ struct CardView: View {
         GeometryReader { metrics in
             VStack {
                 VStack {
-                    Text("\(card.description)")
+                    Text("\(card.prettyDescription)")
                         .font(.title3)
                 }
                 .foregroundColor(.black)

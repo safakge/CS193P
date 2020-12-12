@@ -123,6 +123,10 @@ struct SetGame {
         }
         
         var description: String {
+            return "#\(id)"
+        }
+    
+        var prettyDescription: String {
             return "n: \(numberOfSymbols)\ns: \(shape.rawValue)\nh: \(shading.rawValue)\nc: \(color.rawValue)"
         }
         

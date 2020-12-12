@@ -10,13 +10,14 @@ import Foundation
 
 struct SetGame {
     private(set) var deck: [Card]
-    private(set) var dealtCards:[Card]
-    private var chosenCardIndices:[Int] {
+    private(set) var dealtCards: [Card]
+    private var chosenCardIndices: [Int] {
         return dealtCards.enumerated().filter {
             (member:EnumeratedSequence<[Card]>.Iterator.Element) -> Bool in
             return member.element.chosen
         }.map({ $0.offset })
     }
+    var dealtCardsContainNoPossibleSets: Bool = false
     
     init() {
         deck = []
@@ -31,7 +32,7 @@ struct SetGame {
                 }
             }
         }
-        deck.shuffle()
+        resetDeck()
     }
     
     //    A set consists of three cards satisfying all of these conditions:
@@ -51,36 +52,34 @@ struct SetGame {
     
 //    For any "set", the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different; or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different. (It cannot break down as 4 features the same + 0 different as the cards would be identical, and there are no identical cards in the Set deck.)
     
-    private static func cardsFormValidSet(_ cards:[Card]) -> Bool {
+    private static func cardsFormValidSet(_ cards:[Card], verbose:Bool = false) -> Bool {
         let chosenFeatures = [
             cards.map({ $0.numberOfSymbols }),
             cards.map({ $0.shape.rawValue }),
             cards.map({ $0.shading.rawValue }),
             cards.map({ $0.color.rawValue })
         ]
-        print("\(cards) checking for set...")
+        if verbose { print("\(cards) checking for set...") }
         
-        print("setFormedWithChosenCards: ")
         for (index, feat) in chosenFeatures.enumerated() {
-            // TODO check all distinct
             if Set(feat).count == feat.count {
-                print("Feat #\(index)\(feat) -> all distinct.")
+                if verbose { print("Feat #\(index)\(feat) -> all distinct.") }
             } else if Set(feat).count == 1 {
-                print("Feat #\(index)\(feat) -> all same.")
+                if verbose { print("Feat #\(index)\(feat) -> all same.") }
             } else {
-                // this feat breaks set.
-                print("Feat #\(index)\(feat) -> broke set.")
-                print("\(cards) is not a set.")
+                // not all the same, not everyone distinct. This feat breaks set.
+                if verbose { print("Feat #\(index)\(feat) -> broke set.") }
+                if verbose { print("\(cards) is not a set.") }
                 return false
             }
         }
         
-        print("\(cards) forms a set!")
+        if verbose { print("\(cards) forms a set!") }
         return true
     }
 
     private func setIsFormedWithChosenCards() -> Bool {
-        return SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }))
+        return SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: true)
     }
     
     mutating func toggleChosen(forCard card:Card) {
@@ -118,14 +117,15 @@ struct SetGame {
         }
         
         let dealtCombinations = dealtCards.uniqueCombinations(of: 3)
-        print("\(dealtCombinations) are the \(dealtCombinations.count) combos")
-        
         let setsAvailable = dealtCombinations.filter({ SetGame.cardsFormValidSet(Array($0)) }).map({ Array($0) })
 
         print("dealCards() In deck: \(deck.count), Dealt: \(dealtCards.count), Available Sets: \(setsAvailable.count) (\(setsAvailable))")
         
         if setsAvailable.count == 0 {
             print("THERE ARE NO SETS ON TABLE!!!")
+            dealtCardsContainNoPossibleSets = true
+        } else {
+            dealtCardsContainNoPossibleSets = false
         }
     }
     

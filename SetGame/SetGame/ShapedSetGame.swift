@@ -21,6 +21,13 @@ class ShapedSetGame : ObservableObject {
         return SetGame()
     }
     
+    var bottomMessageContent: String {
+        if model.dealtCardsContainNoPossibleSets {
+            return "No sets!!"
+        }
+        return ""
+    }
+    
     // Intents
     
     func intentDealCards() {

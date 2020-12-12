@@ -21,6 +21,8 @@ struct SetGameView: View {
                     }
             }
             HStack {
+                Text(modelView.bottomMessageContent)
+                    .foregroundColor(.red)
                 Button(action: {
                     modelView.intentDealCards()
                 }, label: { Text("Deal Cards") })

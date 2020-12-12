@@ -50,15 +50,37 @@ struct SetGame {
     //    Given any two cards from the deck, there is one and only one other cards that form a set with them.
     
 //    For any "set", the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different; or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different. (It cannot break down as 4 features the same + 0 different as the cards would be identical, and there are no identical cards in the Set deck.)
-
-    private func setFormedWithChosenCards() -> Bool {
-        // TODO
-        return false
-    }
     
-    private func checkForSet() {
-        let setFormed = setFormedWithChosenCards()
-        print("Checking for set... \(setFormed ? "YES." : "No.")")
+    private static func cardsFormValidSet(_ cards:[Card]) -> Bool {
+        let chosenFeatures = [
+            cards.map({ $0.numberOfSymbols }),
+            cards.map({ $0.shape.rawValue }),
+            cards.map({ $0.shading.rawValue }),
+            cards.map({ $0.color.rawValue })
+        ]
+        print("\(cards) checking for set...")
+        
+        print("setFormedWithChosenCards: ")
+        for (index, feat) in chosenFeatures.enumerated() {
+            // TODO check all distinct
+            if Set(feat).count == feat.count {
+                print("Feat #\(index)\(feat) -> all distinct.")
+            } else if Set(feat).count == 1 {
+                print("Feat #\(index)\(feat) -> all same.")
+            } else {
+                // this feat breaks set.
+                print("Feat #\(index)\(feat) -> broke set.")
+                print("\(cards) is not a set.")
+                return false
+            }
+        }
+        
+        print("\(cards) forms a set!")
+        return true
+    }
+
+    private func setIsFormedWithChosenCards() -> Bool {
+        return SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }))
     }
     
     mutating func toggleChosen(forCard card:Card) {
@@ -75,7 +97,7 @@ struct SetGame {
         print("chosenCardIndices: \(self.chosenCardIndices)")
         
         if chosenCardIndices.count == 3 {
-            checkForSet()
+            let _ = setIsFormedWithChosenCards()
         }
     }
     

@@ -21,11 +21,14 @@ class ShapedSetGame : ObservableObject {
         return SetGame()
     }
     
-    var bottomMessageContent: String {
-        if model.dealtCardsContainNoPossibleSets {
-            return "No sets!!"
+    var someMessageToShowInHud: String? {
+        if dbg_ShowHud {
+            return "This is a hud! A debug message."
         }
-        return ""
+        if model.dealtCardsContainNoPossibleSets {
+            return "No sets."
+        }
+        return nil
     }
     
     // Intents
@@ -41,4 +44,6 @@ class ShapedSetGame : ObservableObject {
     func choose(card:SetGame.Card) {
         model.toggleChosen(forCard: card)
     }
+    
+    var dbg_ShowHud: Bool = false
 }

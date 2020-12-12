@@ -7,30 +7,64 @@
 
 import SwiftUI
 
+struct ModalMessageView: View {
+    var message:String?
+    
+    var body: some View {
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
+        }
+    }
+    
+    @ViewBuilder
+    private func body(for size: CGSize) -> some View {
+        if let message = self.message {
+            ZStack {
+                VStack() {
+                    Text(message)
+                        .bold()
+                        .font(.title)
+                        .multilineTextAlignment(.center)
+                }
+                .padding()
+                .background(Color.red)
+                .cornerRadius(25)
+                .frame(maxWidth:300)
+            }
+            .frame(width: size.width, height: size.height)
+            .contentShape(Rectangle()) // so the empty area is also clickable
+        }
+    }
+}
+
 struct SetGameView: View {
     @ObservedObject var modelView: ShapedSetGame
     
     var body: some View {
-        VStack {
-            Grid(modelView.dealtCards) { card in
-                CardView(card: card)
-                    .onTapGesture {
-                        withAnimation {
-                            modelView.choose(card: card)
+        ZStack {
+            VStack {
+                Grid(modelView.dealtCards) { card in
+                    CardView(card: card)
+                        .onTapGesture {
+                            withAnimation {
+                                modelView.choose(card: card)
+                            }
                         }
-                    }
+                }
+                HStack {
+                    Button(action: {
+                        modelView.intentDealCards()
+                    }, label: { Text("Deal Cards") })
+                    Button(action: {
+                        modelView.intentShuffleCardsBack()
+                    }, label: { Text("Shuffle Back") })
+                }
+                .font(.headline)
             }
-            HStack {
-                Text(modelView.bottomMessageContent)
-                    .foregroundColor(.red)
-                Button(action: {
-                    modelView.intentDealCards()
-                }, label: { Text("Deal Cards") })
-                Button(action: {
-                    modelView.intentShuffleCardsBack()
-                }, label: { Text("Shuffle Back") })
-            }
-            .font(.headline)
+            ModalMessageView(message: modelView.someMessageToShowInHud)
+                .onTapGesture {
+                    print("hud tapped")
+                }
         }
     }
 }
@@ -74,6 +108,7 @@ struct SetGameView_Previews: PreviewProvider {
         let modelView = ShapedSetGame()
         modelView.intentDealCards()
         modelView.choose(card: modelView.dealtCards.first!)
+        modelView.dbg_ShowHud = true
         return SetGameView(modelView: modelView)
     }
 }

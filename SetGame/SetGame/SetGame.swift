@@ -103,11 +103,20 @@ struct SetGame {
     
     mutating func dealCards() {
         while dealtCards.count < 12 {
-            let card = deck.removeLast();
+            let card = deck.removeLast()
             dealtCards.append(card)
         }
         
-        print("dealCards() deck: \(deck.count), dealt: \(dealtCards.count)")
+        let dealtCombinations = dealtCards.uniqueCombinations(of: 3)
+        print("\(dealtCombinations) are the \(dealtCombinations.count) combos")
+        
+        let setsAvailable = dealtCombinations.filter({ SetGame.cardsFormValidSet(Array($0)) }).map({ Array($0) })
+
+        print("dealCards() In deck: \(deck.count), Dealt: \(dealtCards.count), Available Sets: \(setsAvailable.count) (\(setsAvailable))")
+        
+        if setsAvailable.count == 0 {
+            print("THERE ARE NO SETS ON TABLE!!!")
+        }
     }
     
     struct Card: Identifiable, CustomStringConvertible {

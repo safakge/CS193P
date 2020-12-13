@@ -20,6 +20,7 @@
 		AB3387E1257BD964005911A4 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3387E0257BD964005911A4 /* Cardify.swift */; };
 		AB3C2860257F62A500615B05 /* CardShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C285F257F62A500615B05 /* CardShape.swift */; };
 		AB3C286E2584DFA600615B05 /* Combinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C286D2584DFA500615B05 /* Combinations.swift */; };
+		ABCA98D9258638B80089F831 /* ModalMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCA98D8258638B80089F831 /* ModalMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		AB3387E0257BD964005911A4 /* Cardify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		AB3C285F257F62A500615B05 /* CardShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShape.swift; sourceTree = "<group>"; };
 		AB3C286D2584DFA500615B05 /* Combinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combinations.swift; sourceTree = "<group>"; };
+		ABCA98D8258638B80089F831 /* ModalMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				AB3387C0257BD563005911A4 /* Grid.swift */,
 				AB3387BF257BD562005911A4 /* GridLayout.swift */,
 				AB3C286D2584DFA500615B05 /* Combinations.swift */,
+				ABCA98D8258638B80089F831 /* ModalMessageView.swift */,
 			);
 			path = Blocks;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			files = (
 				AB3387C1257BD563005911A4 /* GridLayout.swift in Sources */,
 				AB3387E1257BD964005911A4 /* Cardify.swift in Sources */,
+				ABCA98D9258638B80089F831 /* ModalMessageView.swift in Sources */,
 				AB33879425792301005911A4 /* SetGameView.swift in Sources */,
 				AB3387C7257BD797005911A4 /* SetGame.swift in Sources */,
 				AB33879225792301005911A4 /* SetGameApp.swift in Sources */,

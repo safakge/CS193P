@@ -43,7 +43,7 @@ struct Cardify: AnimatableModifier { //AnimatableModifier = ViewModifier + Anima
     }
     
     private let cornerRadius: CGFloat = 10.0
-    private let edgeLineWidth: CGFloat = 3
+    private let edgeLineWidth: CGFloat = 8
 }
 
 extension View {

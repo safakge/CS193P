@@ -23,7 +23,7 @@ struct SetGameView: View {
                                                 : .orange)
                                             : .gray)
                         .onTapGesture {
-                            withAnimation {
+                            withAnimation(.interactiveSpring()) {
                                 modelView.choose(card: card)
                             }
                         }

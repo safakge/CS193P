@@ -86,9 +86,9 @@ struct SetGame {
     mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
             let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
-            if choosing && self.chosenCardIndices.count == 3 {
-                // New card selected with three chosen cards on the table, game should progress before new card selection
-                progressGameAfterSetCandidateWasProposed(withNextChosenCard:card)
+            if self.chosenCardIndices.count == 3 {
+                // A card was selected with three chosen cards already on the table, game should progress before new card selection
+                progressGameAfterSetCandidateWasProposed(withNextChosenCard: choosing ? card : nil)
                 return
             }
             dealtCards[chosenIndex].chosen = !dealtCards[chosenIndex].chosen

@@ -40,9 +40,6 @@ class ShapedSetGame : ObservableObject {
     }
     
     // Intents
-    func intentProgressGameAfterPickingSetCandidate() {
-        model.resetChosenCards() // TODO: replace with method that does more by progressing the game based on 
-    }
     
     func intentDealCards() {
         model.dealCards()

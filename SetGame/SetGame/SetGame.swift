@@ -89,7 +89,8 @@ struct SetGame {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
             let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
             if choosing && self.chosenCardIndices.count == 3 {
-                // already chosen three cards, and can't choose more
+                // New card selected with three chosen cards on the table, game should progress before new card selection
+                progressGameAfterSetCandidateWasProposed(withNextChosenCard:card)
                 return
             }
             dealtCards[chosenIndex].chosen = !dealtCards[chosenIndex].chosen
@@ -97,9 +98,19 @@ struct SetGame {
             fatalError("toggleChosen called for undealtCard. Fatal.")
         }
         print("chosenCardIndices: \(self.chosenCardIndices)")
-        
-        if chosenCardIndices.count == 3 {
-            let _ = chosenCardsAreAValidSet()
+    }
+    
+    mutating func progressGameAfterSetCandidateWasProposed(withNextChosenCard nextCard:Card?) {
+        if chosenCardsAreAValidSet() {
+            print("progressGameAfterSetCandidateWasProposed with valid set")
+            print("NOT IMPLEMENTED YET")
+            // TODO
+        } else {
+            print("progressGameAfterSetCandidateWasProposed w/o valid set")
+            resetChosenCards()
+            if let nextCard = nextCard {
+                toggleChosen(forCard: nextCard)
+            }
         }
     }
     
@@ -133,9 +144,8 @@ struct SetGame {
         
         if setsAvailable.count == 0 {
             print("THERE ARE NO SETS ON TABLE!!!")
-            dealtCardsContainNoPossibleSets = true
-        } else {
-            dealtCardsContainNoPossibleSets = false
+            print("THERE ARE NO SETS ON TABLE!!!")
+            print("THERE ARE NO SETS ON TABLE!!!")
         }
     }
     

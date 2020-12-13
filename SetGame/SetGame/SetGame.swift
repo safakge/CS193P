@@ -79,10 +79,8 @@ struct SetGame {
     }
 
     func chosenCardsAreAValidSet() -> Bool {
-        if chosenCardIndices.count != 3 {
-            fatalError("nope")
-        }
-        return SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: true)
+        return chosenCardIndices.count == 3 &&
+            SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: false)
     }
     
     mutating func toggleChosen(forCard card:Card) {
@@ -130,11 +128,14 @@ struct SetGame {
     }
     
     mutating func dealCards() {
-        resetDeck()
-        
-        while dealtCards.count < 12 {
-            let card = deck.removeLast()
-            dealtCards.append(card)
+        if dealtCards.count < 12 {
+            while dealtCards.count < 12 {
+                dealOne()
+            }
+        } else {
+            for _ in 0..<3 {
+                dealOne()
+            }
         }
         
         let dealtCombinations = dealtCards.uniqueCombinations(of: 3)
@@ -146,6 +147,15 @@ struct SetGame {
             print("THERE ARE NO SETS ON TABLE!!!")
             print("THERE ARE NO SETS ON TABLE!!!")
             print("THERE ARE NO SETS ON TABLE!!!")
+        }
+    }
+    
+    private mutating func dealOne(replacingWithCardAtIndex replaceIndex:Int? = nil) {
+        let card = deck.removeLast()
+        if let replaceIndex = replaceIndex {
+            // TODO
+        } else {
+            dealtCards.append(card)
         }
     }
     

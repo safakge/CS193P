@@ -16,6 +16,7 @@ struct SetGameView: View {
             VStack {
                 Grid(modelView.dealtCards) { card in
                     CardView(card: card)
+                        .aspectRatio(0.75, contentMode: ContentMode.fit)
                         .foregroundColor(card.chosen ?
                                             (modelView.playerProposedAValidSet != nil ?
                                                 (modelView.playerProposedAValidSet! ? .green : .red)
@@ -82,7 +83,6 @@ struct SetGameView_Previews: PreviewProvider {
         let modelView = ShapedSetGame()
         modelView.intentDealCards()
         modelView.choose(card: modelView.dealtCards.first!)
-        modelView.dbg_ShowHud = true
         return SetGameView(modelView: modelView)
     }
 }

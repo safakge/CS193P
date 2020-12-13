@@ -78,7 +78,10 @@ struct SetGame {
         return true
     }
 
-    private func setIsFormedWithChosenCards() -> Bool {
+    func chosenCardsAreAValidSet() -> Bool {
+        if chosenCardIndices.count != 3 {
+            fatalError("nope")
+        }
         return SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: true)
     }
     
@@ -96,7 +99,7 @@ struct SetGame {
         print("chosenCardIndices: \(self.chosenCardIndices)")
         
         if chosenCardIndices.count == 3 {
-            let _ = setIsFormedWithChosenCards()
+            let _ = chosenCardsAreAValidSet()
         }
     }
     

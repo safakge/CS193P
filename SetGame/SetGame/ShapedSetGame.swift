@@ -21,22 +21,26 @@ class ShapedSetGame : ObservableObject {
         return SetGame()
     }
     
-    var playerPickedASetCandidate: Bool {
-        return model.chosenCardIndices.count == 3
+    /// Returns:
+    /// true: If chosen cards are valid set
+    /// false: If chosen cards are not a valid set
+    /// nil: If not enough cards are yet chosen by player
+    var playerProposedAValidSet: Bool? {
+        guard model.chosenCardIndices.count == 3 else {
+            return nil
+        }
+        return model.chosenCardsAreAValidSet()
     }
     
     var hudMessageToShow: String? {
-        if playerPickedASetCandidate {
-            // TODO different outcomes for set / non-set
-            return "You picked three cards."
+        if let playerProposedAValidSet = playerProposedAValidSet {
+            return playerProposedAValidSet ? "Set!" : "Not a set. Try again."
         }
-        
         return nil
     }
     
     // Intents
-    
-    func intentProgressGameAfterPickingCards() {
+    func intentProgressGameAfterPickingSetCandidate() {
         model.resetChosenCards() // TODO: replace with method that does more by progressing the game based on 
     }
     

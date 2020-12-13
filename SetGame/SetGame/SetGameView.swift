@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ModalMessageView: View {
-    var message:String?
+    var message: String?
+    var successful: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,7 +28,7 @@ struct ModalMessageView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding()
-                .background(Color.red)
+                .background(successful ? Color.green : Color.red)
                 .cornerRadius(25)
                 .frame(maxWidth:300)
             }
@@ -66,7 +67,8 @@ struct SetGameView: View {
                 }
                 .font(.headline)
             }
-            ModalMessageView(message: modelView.hudMessageToShow)
+            ModalMessageView(message: modelView.hudMessageToShow,
+                             successful: modelView.playerProposedAValidSet ?? false)
                 .onTapGesture {
                     withAnimation {
                         modelView.intentProgressGameAfterPickingSetCandidate()

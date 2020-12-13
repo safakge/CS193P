@@ -42,11 +42,16 @@ class ShapedSetGame : ObservableObject {
     // Intents
     
     func intentDealCards() {
-        model.dealCards()
+        if model.chosenCardsAreAValidSet() {
+            model.progressGameAfterSetCandidateWasProposed(withNextChosenCard: nil)
+        } else {
+            model.dealCards()
+        }
     }
     
-    func intentShuffleCardsBack() {
+    func intentResetGame() {
         model.resetDeck()
+        model.dealCards()
     }
     
     func choose(card:SetGame.Card) {

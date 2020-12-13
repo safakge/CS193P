@@ -32,8 +32,8 @@ struct SetGameView: View {
                         modelView.intentDealCards()
                     }, label: { Text("Deal Cards") })
                     Button(action: {
-                        modelView.intentShuffleCardsBack()
-                    }, label: { Text("Shuffle Back") })
+                        modelView.intentResetGame()
+                    }, label: { Text("New Game") })
                 }
                 .font(.headline)
             }

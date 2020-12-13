@@ -84,14 +84,17 @@ struct CardView: View {
     
     var body: some View {
         GeometryReader { metrics in
-            VStack {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.white, Color(white: 0.9, opacity: 1.0)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack {
-                    Text("\(card.prettyDescription)")
-                        .font(.title3)
+                    VStack {
+                        Text("\(card.prettyDescription)")
+                            .font(.title3)
+                    }
+                    .padding(EdgeInsets(top: metrics.size.height * 0.1, leading: metrics.size.width * 0.1, bottom: metrics.size.height * 0.1, trailing: metrics.size.width * 0.1))
                 }
-                .foregroundColor(.black)
-                .padding(EdgeInsets(top: metrics.size.height * 0.1, leading: metrics.size.width * 0.1, bottom: metrics.size.height * 0.1, trailing: metrics.size.width * 0.1))
             }
+            .foregroundColor(.black)
             .cardify(isFaceUp: true)
             .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
             .padding(metrics.size.width * 0.15)

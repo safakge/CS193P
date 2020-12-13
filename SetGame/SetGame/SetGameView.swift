@@ -61,9 +61,9 @@ struct SetGameView: View {
                 }
                 .font(.headline)
             }
-            ModalMessageView(message: modelView.someMessageToShowInHud)
+            ModalMessageView(message: modelView.hudMessageToShow)
                 .onTapGesture {
-                    print("hud tapped")
+                    modelView.intentProgressGameAfterPickingCards()
                 }
         }
     }

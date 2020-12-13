@@ -21,17 +21,24 @@ class ShapedSetGame : ObservableObject {
         return SetGame()
     }
     
-    var someMessageToShowInHud: String? {
-        if dbg_ShowHud {
-            return "This is a hud! A debug message."
+    var playerPickedASetCandidate: Bool {
+        return model.chosenCardIndices.count == 3
+    }
+    
+    var hudMessageToShow: String? {
+        if playerPickedASetCandidate {
+            // TODO different outcomes for set / non-set
+            return "You picked three cards."
         }
-        if model.dealtCardsContainNoPossibleSets {
-            return "No sets."
-        }
+        
         return nil
     }
     
     // Intents
+    
+    func intentProgressGameAfterPickingCards() {
+        model.resetChosenCards() // TODO: replace with method that does more by progressing the game based on 
+    }
     
     func intentDealCards() {
         model.dealCards()

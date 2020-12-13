@@ -11,7 +11,7 @@ import Foundation
 struct SetGame {
     private(set) var deck: [Card]
     private(set) var dealtCards: [Card]
-    private var chosenCardIndices: [Int] {
+    var chosenCardIndices: [Int] {
         return dealtCards.enumerated().filter {
             (member:EnumeratedSequence<[Card]>.Iterator.Element) -> Bool in
             return member.element.chosen
@@ -100,7 +100,14 @@ struct SetGame {
         }
     }
     
+    mutating func resetChosenCards() {
+        for i in 0..<dealtCards.count {
+            dealtCards[i].chosen = false
+        }
+    }
+    
     mutating func resetDeck() {
+        resetChosenCards()
         if dealtCards.count > 0 {
             deck.append(contentsOf: dealtCards)
             dealtCards.removeAll()

@@ -45,6 +45,11 @@ struct SetGameView: View {
             VStack {
                 Grid(modelView.dealtCards) { card in
                     CardView(card: card)
+                        .foregroundColor(card.chosen ?
+                                            (modelView.playerProposedAValidSet != nil ?
+                                                (modelView.playerProposedAValidSet! ? .green : .red)
+                                                : .orange)
+                                            : .gray)
                         .onTapGesture {
                             withAnimation {
                                 modelView.choose(card: card)
@@ -63,7 +68,9 @@ struct SetGameView: View {
             }
             ModalMessageView(message: modelView.hudMessageToShow)
                 .onTapGesture {
-                    modelView.intentProgressGameAfterPickingSetCandidate()
+                    withAnimation {
+                        modelView.intentProgressGameAfterPickingSetCandidate()
+                    }
                 }
         }
     }
@@ -86,7 +93,6 @@ struct CardView: View {
             .cardify(isFaceUp: true)
             .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
             .padding(metrics.size.width * 0.15)
-            .foregroundColor(card.chosen ? .orange : .gray)
         }
         
     }

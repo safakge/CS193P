@@ -30,10 +30,14 @@ struct SetGameView: View {
                 }
                 HStack {
                     Button(action: {
-                        modelView.intentDealCards()
+                        withAnimation(.easeInOut) {
+                            modelView.intentDealCards()
+                        }
                     }, label: { Text("Deal Cards") })
                     Button(action: {
-                        modelView.intentResetGame()
+                        withAnimation(.easeInOut) {
+                            modelView.intentResetGame()
+                        }
                     }, label: { Text("New Game") })
                 }
                 .font(.headline)

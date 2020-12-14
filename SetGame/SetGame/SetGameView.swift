@@ -55,7 +55,6 @@ struct CardView: View {
                         Text("\(card.prettyDescription)")
                             .font(.title3)
                     }
-                    .padding(EdgeInsets(top: metrics.size.height * 0.1, leading: metrics.size.width * 0.1, bottom: metrics.size.height * 0.1, trailing: metrics.size.width * 0.1))
                 }
             }
             .foregroundColor(.black)

@@ -38,6 +38,12 @@ struct SetGameView: View {
                 }
                 .font(.headline)
             }
+        }.onAppear {
+            if modelView.dealtCards.count == 0 {
+                withAnimation(.easeInOut) {
+                    modelView.intentDealCards() // Trigger new game on launch
+                }
+            }
         }
     }
 }

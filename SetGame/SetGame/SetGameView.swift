@@ -68,12 +68,51 @@ struct CardView: View {
             .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
             .padding(metrics.size.width * 0.15)
         }
-        
     }
 }
 
 
+struct OffsetModifier: ViewModifier {
+    let movingOffset: CGSize
+    
+    func body(content: Content) -> some View {
+        return content.offset(x: movingOffset.width, y: movingOffset.height)
+    }
+}
 
+extension AnyTransition {
+    
+    static func fly(withCurrentPosition viewPosition:CGPoint?) -> AnyTransition {
+        let offset = makeRandomOffScreenLocation(metrics: nil)
+        return .modifier(active: OffsetModifier(movingOffset: offset),
+                         identity: OffsetModifier(movingOffset: .zero))
+    }
+    
+    static func makeRandomOffScreenLocation(metrics:GeometryProxy?) -> CGSize {
+        let screenBounds = UIScreen.main.bounds
+        
+        let perimeter = (screenBounds.width*2 + screenBounds.height*2)
+        
+        let randomPoint = CGFloat.random(in: 0...perimeter)
+        
+        if randomPoint < screenBounds.width {
+            return CGSize(width: randomPoint,
+                          height: 0) // x movable, y 0
+        } else if randomPoint < screenBounds.width + screenBounds.height {
+            return CGSize(width: screenBounds.width,
+                          height: randomPoint - screenBounds.width) // x full, y movable
+        } else if randomPoint < screenBounds.width*2 + screenBounds.height {
+            return CGSize(width: randomPoint - (screenBounds.width + screenBounds.height) ,
+                          height: screenBounds.height) // y full, x movable
+        } else {
+            return CGSize(width: 0,
+                          height: randomPoint - (screenBounds.width*2 + screenBounds.height)) // x 0, y movable
+        }
+        //        print("metriks \(metrics.frame(in: .global))")
+        //        let absolutePosition = metrics.frame(in: .global)
+        //        return CGSize(width: absolutePosition.origin.x + 100, height: absolutePosition.origin.y +  100)
+    }
+}
 
 
 

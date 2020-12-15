@@ -91,44 +91,20 @@ struct OffsetModifier: ViewModifier {
 extension AnyTransition {
     
     static var fly:AnyTransition {
-        let flyingOffset = makeRandomOffScreenLocation()
-        print("flyingOffset \(flyingOffset)")
-        return .modifier(active: OffsetModifier(flyingOffset: flyingOffset),
-                         identity: OffsetModifier(flyingOffset: .zero))
-    }
-    
-    static func fly(withCurrentPosition viewPosition:CGPoint?) -> AnyTransition {
-        let offset = makeRandomOffScreenLocation()
-        return .modifier(active: OffsetModifier(flyingOffset: offset),
-                         identity: OffsetModifier(flyingOffset: .zero))
-    }
-    
-    static func makeRandomOffScreenLocation() -> CGSize {
-        let screenBounds = UIScreen.main.bounds
-        let offsetSize = CGSize(width: screenBounds.width*2, height: screenBounds.height*2)
-        
-        print("bounds \(screenBounds), ENLARGED: <<<\(offsetSize)>>>")
-        
-        let perimeter = (offsetSize.width*2 + offsetSize.height*2)
-        
-        let randomPoint = CGFloat.random(in: 0...perimeter)
-        
-        let retVal:CGSize
-        if randomPoint < screenBounds.width {
-            retVal = CGSize(width: randomPoint,
-                          height: 0) // x movable, y 0
-        } else if randomPoint < screenBounds.width + screenBounds.height {
-            retVal = CGSize(width: screenBounds.width,
-                          height: randomPoint - screenBounds.width) // x full, y movable
-        } else if randomPoint < screenBounds.width*2 + screenBounds.height {
-            retVal = CGSize(width: randomPoint - (screenBounds.width + screenBounds.height) ,
-                          height: screenBounds.height) // y full, x movable
-        } else {
-            retVal = CGSize(width: 0,
-                          height: randomPoint - (screenBounds.width*2 + screenBounds.height)) // x 0, y movable
+        func randomDistanceFromCenterToCirclePerimeter(withRadius radius:CGFloat) -> CGSize {
+            // Random angle in [0, 2*pi]
+            let theta = CGFloat(arc4random_uniform(UInt32.max))/CGFloat(UInt32.max-1) * CGFloat(Float.pi) * 2.0
+            // Convert polar to cartesian
+            let x = radius * cos(theta)
+            let y = radius * sin(theta)
+            
+            return CGSize(width: CGFloat(x), height: CGFloat(y))
         }
         
-        return CGSize(width: retVal.width - screenBounds.width, height: retVal.height - screenBounds.height)
+        let longerSide = CGFloat.maximum(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        
+        return .modifier(active: OffsetModifier(flyingOffset: randomDistanceFromCenterToCirclePerimeter(withRadius: longerSide)),
+                         identity: OffsetModifier(flyingOffset: .zero))
     }
 }
 

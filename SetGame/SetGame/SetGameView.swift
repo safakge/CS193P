@@ -46,6 +46,9 @@ struct SetGameView: View {
                 }
                 .font(.headline)
             }
+            ModalMessageView(state: modelView.playerProposedAValidSet,
+                             successMessage: "It's a set!",
+                             failureMessage: "Try again.").animation(Animation.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.75))
         }.onAppear {
             if modelView.dealtCards.count == 0 {
                 withAnimation(SetGameView.cardFlyAnimation) {

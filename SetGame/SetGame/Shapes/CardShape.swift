@@ -11,6 +11,25 @@ import SwiftUI
 struct CardShape: Shape {
     var shapeType:SetGame.Card.CardFeatureShapeType
     
+    var strokeWidth: CGFloat = 3.0
+    
+    func applySetShapeFeatures(forCard card: SetGame.Card) -> some View {
+        var view:AnyView
+        switch card.shading {
+            case .One:
+                view = AnyView(self.stroke(lineWidth: strokeWidth))
+            case .Two:
+                view = AnyView(self.fill().opacity(0.25))
+            case .Three:
+                view = AnyView(self.fill())
+        }
+        
+        view = AnyView(view.foregroundColor(ShapedSetGame.shapeColor(forFeatureValue: card.color)))
+        
+        return view
+        
+    }
+    
     func path(in rect: CGRect) -> Path {
         switch shapeType {
             case .One:
@@ -64,6 +83,7 @@ struct CardShape: Shape {
         path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
         path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.midX + 1, y: rect.minY))
         
         return path
     }

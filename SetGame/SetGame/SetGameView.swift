@@ -61,7 +61,7 @@ struct SetGameView: View {
 
 
 struct CardView: View {
-    var card:SetGame.Card
+    var card: SetGame.Card
     
     var body: some View {
         GeometryReader { metrics in
@@ -71,8 +71,7 @@ struct CardView: View {
                     VStack {
                         ForEach(0..<card.numberOfSymbols) { _ in
                             CardShape(shapeType: card.shapeType)
-                                .stroke(lineWidth: 5)
-                                .foregroundColor(ShapedSetGame.shapeColor(forFeatureValue: card.color))
+                                .applySetShapeFeatures(forCard: card)
                         }
 //                        Text("\(card.prettyDescription)")
 //                            .font(.title3) // debug mode
@@ -80,7 +79,6 @@ struct CardView: View {
                     .padding()
                 }
             }
-            .foregroundColor(.black)
             .cardify(isFaceUp: true)
             .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
             .padding(metrics.size.width * 0.15)

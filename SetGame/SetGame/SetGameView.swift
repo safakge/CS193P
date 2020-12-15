@@ -73,8 +73,7 @@ struct CardView: View {
                             CardShape(shapeType: card.shapeType)
                                 .applySetShapeFeatures(forCard: card)
                         }
-//                        Text("\(card.prettyDescription)")
-//                            .font(.title3) // debug mode
+                        .frame(maxHeight: (metrics.size.height * 0.15)) // magic
                     }
                     .padding()
                 }

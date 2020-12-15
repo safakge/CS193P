@@ -35,7 +35,7 @@ struct ModalMessageView: View {
                     }
                     .padding()
                     .background(state ? Color.green : Color.red)
-                    .cornerRadius(25)
+                    .cornerRadius(10)
                     .frame(maxWidth:300)
                     Spacer().frame(height:50)
                 }

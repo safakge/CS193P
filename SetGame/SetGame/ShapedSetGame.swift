@@ -5,7 +5,7 @@
 //  Created by Safak Gezer on 12/5/20.
 //
 
-import Foundation
+import SwiftUI
 
 
 class ShapedSetGame : ObservableObject {
@@ -58,5 +58,12 @@ class ShapedSetGame : ObservableObject {
         model.toggleChosen(forCard: card)
     }
     
-    var dbg_ShowHud: Bool = false
+    // Game Params
+    static func shapeColor(forFeatureValue featureValue:SetGame.Card.CardFeatureColor) -> Color {
+        switch featureValue {
+            case .One: return .red
+            case .Two: return .blue
+            case .Three: return .purple
+        }
+    }
 }

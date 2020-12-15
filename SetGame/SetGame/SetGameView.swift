@@ -72,7 +72,7 @@ struct CardView: View {
                         ForEach(0..<card.numberOfSymbols) { _ in
                             CardShape(shapeType: card.shapeType)
                                 .stroke(lineWidth: 5)
-                                .foregroundColor(.red)
+                                .foregroundColor(ShapedSetGame.shapeColor(forFeatureValue: card.color))
                         }
 //                        Text("\(card.prettyDescription)")
 //                            .font(.title3) // debug mode

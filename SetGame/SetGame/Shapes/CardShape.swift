@@ -9,16 +9,21 @@ import SwiftUI
 
 
 struct CardShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        fatalError()
-    }
-}
-
-struct SquiggleShape: Shape {
+    var shapeType:SetGame.Card.CardFeatureShapeType
     
     func path(in rect: CGRect) -> Path {
+        switch shapeType {
+            case .One:
+                return diamondPath(in: rect)
+            case .Two:
+                return ovalPath(in: rect)
+            case .Three:
+                return squigglePath(in: rect)
+        }
+    }
+    
+    func squigglePath(in rect: CGRect) -> Path {
         var path = Path()
-        
         path.move(to: CGPoint(x: 104.0, y: 15.0))
         path.addCurve(to: CGPoint(x: 63.0, y: 54.0),
                       control1: CGPoint(x: 112.4, y: 36.9),
@@ -50,25 +55,20 @@ struct SquiggleShape: Shape {
         return path
             .offsetBy(dx: rect.minX - path.boundingRect.minX, dy: rect.midY - path.boundingRect.midY)
     }
-}
-
-struct DiamondShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    func diamondPath(in rect: CGRect) -> Path {
         var path = Path()
         
         path.move(to: CGPoint(x: rect.midX, y: rect.minY))
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
         path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
-
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+        
         return path
     }
-}
-
-struct OvalShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    func ovalPath(in rect: CGRect) -> Path {
         var path = Path()
         path.addEllipse(in: rect)
         

@@ -69,9 +69,15 @@ struct CardView: View {
                 LinearGradient(gradient: Gradient(colors: [Color.white, Color(white: 0.9, opacity: 1.0)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack {
                     VStack {
-                        Text("\(card.prettyDescription)")
-                            .font(.title3)
+                        ForEach(0..<card.numberOfSymbols) { _ in
+                            CardShape(shapeType: card.shapeType)
+                                .stroke(lineWidth: 5)
+                                .foregroundColor(.red)
+                        }
+//                        Text("\(card.prettyDescription)")
+//                            .font(.title3) // debug mode
                     }
+                    .padding()
                 }
             }
             .foregroundColor(.black)

@@ -11,7 +11,7 @@ import SwiftUI
 struct SetGameView: View {
     @ObservedObject var modelView: ShapedSetGame
     
-    static var cardFlyAnimation: Animation = Animation.easeOut(duration:0.5)
+    static var cardFlyAnimation: Animation = Animation.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.75)
     
     var body: some View {
         ZStack {

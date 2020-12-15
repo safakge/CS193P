@@ -11,6 +11,8 @@ import SwiftUI
 struct SetGameView: View {
     @ObservedObject var modelView: ShapedSetGame
     
+    static var cardFlyAnimation: Animation = Animation.easeOut(duration:0.5)
+    
     var body: some View {
         ZStack {
             VStack {
@@ -27,15 +29,17 @@ struct SetGameView: View {
                                 modelView.choose(card: card)
                             }
                         }
+                        .transition(.fly)
+                        .rotationEffect(Angle.degrees(card.chosen ? 5 : 0))
                 }
                 HStack {
                     Button(action: {
-                        withAnimation(.easeInOut) {
+                        withAnimation(SetGameView.cardFlyAnimation) {
                             modelView.intentDealCards()
                         }
                     }, label: { Text("Deal Cards") })
                     Button(action: {
-                        withAnimation(.easeInOut) {
+                        withAnimation(SetGameView.cardFlyAnimation) {
                             modelView.intentResetGame()
                         }
                     }, label: { Text("New Game") })
@@ -44,7 +48,7 @@ struct SetGameView: View {
             }
         }.onAppear {
             if modelView.dealtCards.count == 0 {
-                withAnimation(.easeInOut) {
+                withAnimation(SetGameView.cardFlyAnimation) {
                     modelView.intentDealCards() // Trigger new game on launch
                 }
             }
@@ -77,44 +81,54 @@ struct CardView: View {
 
 
 struct OffsetModifier: ViewModifier {
-    let movingOffset: CGSize
+    let flyingOffset: CGSize
     
     func body(content: Content) -> some View {
-        return content.offset(x: movingOffset.width, y: movingOffset.height)
+        return content.offset(x: flyingOffset.width, y: flyingOffset.height)
     }
 }
 
 extension AnyTransition {
     
-    static func fly(withCurrentPosition viewPosition:CGPoint?) -> AnyTransition {
-        let offset = makeRandomOffScreenLocation(metrics: nil)
-        return .modifier(active: OffsetModifier(movingOffset: offset),
-                         identity: OffsetModifier(movingOffset: .zero))
+    static var fly:AnyTransition {
+        let flyingOffset = makeRandomOffScreenLocation()
+        print("flyingOffset \(flyingOffset)")
+        return .modifier(active: OffsetModifier(flyingOffset: flyingOffset),
+                         identity: OffsetModifier(flyingOffset: .zero))
     }
     
-    static func makeRandomOffScreenLocation(metrics:GeometryProxy?) -> CGSize {
+    static func fly(withCurrentPosition viewPosition:CGPoint?) -> AnyTransition {
+        let offset = makeRandomOffScreenLocation()
+        return .modifier(active: OffsetModifier(flyingOffset: offset),
+                         identity: OffsetModifier(flyingOffset: .zero))
+    }
+    
+    static func makeRandomOffScreenLocation() -> CGSize {
         let screenBounds = UIScreen.main.bounds
+        let offsetSize = CGSize(width: screenBounds.width*2, height: screenBounds.height*2)
         
-        let perimeter = (screenBounds.width*2 + screenBounds.height*2)
+        print("bounds \(screenBounds), ENLARGED: <<<\(offsetSize)>>>")
+        
+        let perimeter = (offsetSize.width*2 + offsetSize.height*2)
         
         let randomPoint = CGFloat.random(in: 0...perimeter)
         
+        let retVal:CGSize
         if randomPoint < screenBounds.width {
-            return CGSize(width: randomPoint,
+            retVal = CGSize(width: randomPoint,
                           height: 0) // x movable, y 0
         } else if randomPoint < screenBounds.width + screenBounds.height {
-            return CGSize(width: screenBounds.width,
+            retVal = CGSize(width: screenBounds.width,
                           height: randomPoint - screenBounds.width) // x full, y movable
         } else if randomPoint < screenBounds.width*2 + screenBounds.height {
-            return CGSize(width: randomPoint - (screenBounds.width + screenBounds.height) ,
+            retVal = CGSize(width: randomPoint - (screenBounds.width + screenBounds.height) ,
                           height: screenBounds.height) // y full, x movable
         } else {
-            return CGSize(width: 0,
+            retVal = CGSize(width: 0,
                           height: randomPoint - (screenBounds.width*2 + screenBounds.height)) // x 0, y movable
         }
-        //        print("metriks \(metrics.frame(in: .global))")
-        //        let absolutePosition = metrics.frame(in: .global)
-        //        return CGSize(width: absolutePosition.origin.x + 100, height: absolutePosition.origin.y +  100)
+        
+        return CGSize(width: retVal.width - screenBounds.width, height: retVal.height - screenBounds.height)
     }
 }
 

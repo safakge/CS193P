@@ -23,10 +23,10 @@ struct SetGame {
         deck = []
         dealtCards = []
         for number in 1...3 {
-            for shape in Card.CardShape.allCases {
-                for shading in Card.CardShading.allCases {
-                    for color in Card.CardColor.allCases {
-                        let card = Card(numberOfSymbols: number, shape: shape, shading: shading, color: color)
+            for shape in Card.CardFeatureShapeType.allCases {
+                for shading in Card.CardFeatureShading.allCases {
+                    for color in Card.CardFeatureColor.allCases {
+                        let card = Card(numberOfSymbols: number, shapeType: shape, shading: shading, color: color)
                         deck.append(card)
                     }
                 }
@@ -55,7 +55,7 @@ struct SetGame {
     private static func cardsFormValidSet(_ cards:[Card], verbose:Bool = false) -> Bool {
         let chosenFeatures = [
             cards.map({ $0.numberOfSymbols }),
-            cards.map({ $0.shape.rawValue }),
+            cards.map({ $0.shapeType.rawValue }),
             cards.map({ $0.shading.rawValue }),
             cards.map({ $0.color.rawValue })
         ]
@@ -163,12 +163,12 @@ struct SetGame {
         var chosen:Bool = false
         
         let numberOfSymbols:Int
-        let shape:CardShape
-        let shading:CardShading
-        let color:CardColor
+        let shapeType:CardFeatureShapeType
+        let shading:CardFeatureShading
+        let color:CardFeatureColor
         
         var id: Int {
-            return numberOfSymbols*1000 + shape.rawValue*100 + shading.rawValue*10 + color.rawValue
+            return numberOfSymbols*1000 + shapeType.rawValue*100 + shading.rawValue*10 + color.rawValue
         }
         
         var description: String {
@@ -176,16 +176,16 @@ struct SetGame {
         }
     
         var prettyDescription: String {
-            return "n: \(numberOfSymbols)\ns: \(shape.rawValue)\nh: \(shading.rawValue)\nc: \(color.rawValue)"
+            return "n: \(numberOfSymbols)\ns: \(shapeType.rawValue)\nh: \(shading.rawValue)\nc: \(color.rawValue)"
         }
         
-        enum CardShape: Int, CaseIterable {
+        enum CardFeatureShapeType: Int, CaseIterable {
             case One = 1, Two = 2, Three = 3
         }
-        enum CardShading: Int, CaseIterable {
+        enum CardFeatureShading: Int, CaseIterable {
             case One = 1, Two = 2, Three = 3
         }
-        enum CardColor: Int, CaseIterable {
+        enum CardFeatureColor: Int, CaseIterable {
             case One = 1, Two = 2, Three = 3
         }
     }

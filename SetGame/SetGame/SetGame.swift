@@ -11,13 +11,14 @@ import Foundation
 struct SetGame {
     private(set) var deck: [Card]
     private(set) var dealtCards: [Card]
+    private(set) var matchedCards: [Card]
     var chosenCardIndices: [Int] {
         return dealtCards.enumerated().filter {
             (member:EnumeratedSequence<[Card]>.Iterator.Element) -> Bool in
             return member.element.isChosen
         }.map({ $0.offset })
     }
-    var dealtCardsContainNoPossibleSets: Bool = false
+    var dbg_matchAnyCards: Bool = false
     
     init() {
         deck = []
@@ -80,7 +81,8 @@ struct SetGame {
 
     func chosenCardsAreAValidSet() -> Bool {
         return chosenCardIndices.count == 3 &&
-            SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: false)
+            (dbg_matchAnyCards ||
+                SetGame.cardsFormValidSet(dealtCards.enumerated().filter({ return chosenCardIndices.contains($0.offset) }).map({ $0.element }), verbose: false))
     }
     
     mutating func toggleChosen(forCard card:Card) {
@@ -128,13 +130,13 @@ struct SetGame {
     }
     
     mutating func dealCards() {
-        if dealtCards.count < 12 {
+        if dealtCards.count < 12 { // TODO consider endgame (not enough cards in deck)
             while dealtCards.count < 12 {
                 dealOne()
             }
         } else {
             for _ in 0..<3 {
-                dealOne()
+                dealOne() // TODO endgame check (not enough cards in deck)
             }
         }
         
@@ -158,6 +160,7 @@ struct SetGame {
             dealtCards.append(card)
         }
     }
+    
     
     struct Card: Identifiable, CustomStringConvertible {
         var isChosen:Bool = false

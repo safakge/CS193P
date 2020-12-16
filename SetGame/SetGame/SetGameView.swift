@@ -19,7 +19,7 @@ struct SetGameView: View {
                 Grid(modelView.dealtCards) { card in
                     CardView(card: card)
                         .aspectRatio(0.75, contentMode: ContentMode.fit)
-                        .foregroundColor(card.chosen ?
+                        .foregroundColor(card.isChosen ?
                                             (modelView.playerProposedAValidSet != nil ?
                                                 (modelView.playerProposedAValidSet! ? .green : .red)
                                                 : .orange)
@@ -30,7 +30,7 @@ struct SetGameView: View {
                             }
                         }
                         .transition(.fly)
-                        .rotationEffect(Angle.degrees(card.chosen ? Double(card.id%50 - 25) / 5 : 0))
+                        .rotationEffect(Angle.degrees(card.isChosen ? Double(card.id%50 - 25) / 5 : 0))
                 }
                 HStack {
                     Button(action: {
@@ -80,7 +80,7 @@ struct CardView: View {
                 }
             }
             .cardify(isFaceUp: true)
-            .scaleEffect(CGSize(width: card.chosen ? 1.15 : 1, height: card.chosen ? 1.15 : 1), anchor: .center)
+            .scaleEffect(CGSize(width: card.isChosen ? 1.15 : 1, height: card.isChosen ? 1.15 : 1), anchor: .center)
             .padding(metrics.size.width * 0.15)
         }
     }

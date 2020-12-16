@@ -14,7 +14,7 @@ struct SetGame {
     var chosenCardIndices: [Int] {
         return dealtCards.enumerated().filter {
             (member:EnumeratedSequence<[Card]>.Iterator.Element) -> Bool in
-            return member.element.chosen
+            return member.element.isChosen
         }.map({ $0.offset })
     }
     var dealtCardsContainNoPossibleSets: Bool = false
@@ -85,13 +85,13 @@ struct SetGame {
     
     mutating func toggleChosen(forCard card:Card) {
         if let chosenIndex = dealtCards.firstIndex(where: { (cardAtHand:Card) -> Bool in cardAtHand.id == card.id }) {
-            let choosing = !dealtCards[chosenIndex].chosen // as in: not unchoosing
+            let choosing = !dealtCards[chosenIndex].isChosen // as in: not unchoosing
             if self.chosenCardIndices.count == 3 {
                 // A card was selected with three chosen cards already on the table, game should progress before new card selection
                 progressGameAfterSetCandidateWasProposed(withNextChosenCard: choosing ? card : nil)
                 return
             }
-            dealtCards[chosenIndex].chosen = !dealtCards[chosenIndex].chosen
+            dealtCards[chosenIndex].isChosen = !dealtCards[chosenIndex].isChosen
         } else {
             fatalError("toggleChosen called for undealtCard. Fatal.")
         }
@@ -114,7 +114,7 @@ struct SetGame {
     
     mutating func resetChosenCards() {
         for i in 0..<dealtCards.count {
-            dealtCards[i].chosen = false
+            dealtCards[i].isChosen = false
         }
     }
     
@@ -160,7 +160,7 @@ struct SetGame {
     }
     
     struct Card: Identifiable, CustomStringConvertible {
-        var chosen:Bool = false
+        var isChosen:Bool = false
         
         let numberOfSymbols:Int
         let shapeType:CardFeatureShapeType

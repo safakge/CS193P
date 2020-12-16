@@ -19,6 +19,7 @@ struct SetGame {
         }.map({ $0.offset })
     }
     var dbg_matchAnyCards: Bool = false
+    var dbg_smallDeck: Bool = false
     
     init() {
         deck = []
@@ -33,6 +34,9 @@ struct SetGame {
                     }
                 }
             }
+        }
+        if dbg_smallDeck {
+            deck = Array(deck.prefix(15))
         }
         resetDeck()
     }

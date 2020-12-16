@@ -12,6 +12,7 @@ struct ModalMessageView: View {
     var state: Bool?
     var successMessage: String
     var failureMessage: String
+    var descriptionMessage: String?
     var modal: Bool = false // TODO
     
     var body: some View {
@@ -27,16 +28,21 @@ struct ModalMessageView: View {
             ZStack {
                 VStack {
                     Spacer()
-                    Group() {
+                    VStack() {
                         Text(message)
                             .bold()
                             .font(.title)
                             .multilineTextAlignment(.center)
+                        if let description = descriptionMessage {
+                            Text(description)
+                                .font(.title3)
+                                .foregroundColor(.secondary)
+                        }
                     }
+                    .frame(maxWidth:300)
                     .padding()
                     .background(state ? Color.green : Color.red)
                     .cornerRadius(10)
-                    .frame(maxWidth:300)
                     Spacer().frame(height:50)
                 }
             }

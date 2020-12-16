@@ -23,6 +23,7 @@ struct SetGame {
     init() {
         deck = []
         dealtCards = []
+        matchedCards = []
         for number in 1...3 {
             for shape in Card.CardFeatureShapeType.allCases {
                 for shading in Card.CardFeatureShading.allCases {
@@ -102,9 +103,7 @@ struct SetGame {
     
     mutating func progressGameAfterSetCandidateWasProposed(withNextChosenCard nextCard:Card?) {
         if chosenCardsAreAValidSet() {
-            print("progressGameAfterSetCandidateWasProposed with valid set")
-            print("NOT IMPLEMENTED YET")
-            // TODO
+            replaceMatchedCardsFromDeck()
         } else {
             print("progressGameAfterSetCandidateWasProposed w/o valid set")
             resetChosenCards()
@@ -126,6 +125,10 @@ struct SetGame {
             deck.append(contentsOf: dealtCards)
             dealtCards.removeAll()
         }
+        if matchedCards.count > 0 {
+            matchedCards.append(contentsOf: matchedCards)
+            matchedCards.removeAll()
+        }
         deck.shuffle()
     }
     
@@ -140,6 +143,10 @@ struct SetGame {
             }
         }
         
+        checkDealtCardsForSetCombinations()
+    }
+    
+    private func checkDealtCardsForSetCombinations() {
         let dealtCombinations = dealtCards.uniqueCombinations(of: 3)
         let setsAvailable = dealtCombinations.filter({ SetGame.cardsFormValidSet(Array($0)) }).map({ Array($0) })
 
@@ -152,12 +159,22 @@ struct SetGame {
         }
     }
     
-    private mutating func dealOne(replacingWithCardAtIndex replaceIndex:Int? = nil) {
-        let card = deck.removeLast()
-        if let replaceIndex = replaceIndex {
-            // TODO
+    mutating func replaceMatchedCardsFromDeck() {
+        assert(chosenCardsAreAValidSet())
+        for chosenIndex in chosenCardIndices {
+            dealOne(replacingWithMatchedCardAtIndex: chosenIndex)
+        }
+        
+        checkDealtCardsForSetCombinations()
+    }
+    
+    private mutating func dealOne(replacingWithMatchedCardAtIndex matchedCardIndexToReplace:Int? = nil) {
+        let nextCardFromDeck = deck.removeLast()
+        if let replaceIndex = matchedCardIndexToReplace {
+            matchedCards.append(dealtCards.remove(at: replaceIndex))
+            dealtCards.insert(nextCardFromDeck, at: replaceIndex)
         } else {
-            dealtCards.append(card)
+            dealtCards.append(nextCardFromDeck)
         }
     }
     

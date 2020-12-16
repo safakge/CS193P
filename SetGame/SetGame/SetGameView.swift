@@ -32,12 +32,14 @@ struct SetGameView: View {
                         .transition(.fly)
                         .rotationEffect(Angle.degrees(card.isChosen ? Double(card.id%50 - 25) / 5 : 0))
                 }
+                Divider()
                 HStack {
                     Button(action: {
                         withAnimation(SetGameView.cardFlyAnimation) {
                             modelView.intentDealCards()
                         }
                     }, label: { Text("Deal Cards") })
+                    Text("|").foregroundColor(.secondary)
                     Button(action: {
                         withAnimation(SetGameView.cardFlyAnimation) {
                             modelView.intentResetGame()
@@ -45,6 +47,8 @@ struct SetGameView: View {
                     }, label: { Text("New Game") })
                 }
                 .font(.headline)
+                Text(modelView.statsString)
+                    .foregroundColor(.secondary)
             }
             ModalMessageView(state: modelView.playerProposedAValidSet,
                              successMessage: "It's a set! 🙆‍♀️",

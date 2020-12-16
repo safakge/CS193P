@@ -17,6 +17,10 @@ class ShapedSetGame : ObservableObject {
         }
     }
     
+    var statsString: String {
+        return "Score: \(model.matchedCards.count) (Remaining in deck: \(model.deck.count))"
+    }
+    
     private static func createSetGameModel() -> SetGame {
         return SetGame()
     }

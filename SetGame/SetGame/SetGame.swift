@@ -130,7 +130,7 @@ struct SetGame {
             dealtCards.removeAll()
         }
         if matchedCards.count > 0 {
-            matchedCards.append(contentsOf: matchedCards)
+            deck.append(contentsOf: matchedCards)
             matchedCards.removeAll()
         }
         deck.shuffle()

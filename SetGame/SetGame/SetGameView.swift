@@ -30,7 +30,7 @@ struct SetGameView: View {
                             }
                         }
                         .transition(.fly)
-                        .rotationEffect(Angle.degrees(card.chosen ? Double.random(in: -5...5) : 0))
+                        .rotationEffect(Angle.degrees(card.chosen ? Double(card.id%50 - 25) / 5 : 0))
                 }
                 HStack {
                     Button(action: {

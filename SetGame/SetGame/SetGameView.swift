@@ -63,6 +63,7 @@ struct SetGameView: View {
 
 struct CardView: View {
     var card: SetGame.Card
+    static var debugMode: Bool = true
     
     var body: some View {
         GeometryReader { metrics in
@@ -75,6 +76,10 @@ struct CardView: View {
                                 .applySetShapeFeatures(forCard: card)
                         }
                         .frame(maxHeight: (metrics.size.height * 0.15)) // magic
+                        if CardView.debugMode {
+                            Text("#\(String(card.id))")
+                                .font(.footnote)
+                        }
                     }
                     .padding()
                 }

@@ -25,7 +25,7 @@ struct SetGameView: View {
                                                 : .orange)
                                             : .gray)
                         .onTapGesture {
-                            withAnimation(.interactiveSpring()) {
+                            withAnimation(modelView.playerProposedAValidSet ?? false ? SetGameView.cardFlyAnimation : Animation.interactiveSpring()) {
                                 modelView.choose(card: card)
                             }
                         }
@@ -63,7 +63,7 @@ struct SetGameView: View {
 
 struct CardView: View {
     var card: SetGame.Card
-    static var debugMode: Bool = true
+    static var debugMode: Bool = false
     
     var body: some View {
         GeometryReader { metrics in

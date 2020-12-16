@@ -133,13 +133,19 @@ struct SetGame {
     }
     
     mutating func dealCards() {
-        if dealtCards.count < 12 { // TODO consider endgame (not enough cards in deck)
+        if dealtCards.count == 0 { // TODO consider endgame (not enough cards in deck)
             while dealtCards.count < 12 {
-                dealOne()
+                if !dealOne() {
+                    print("Deck exhausted!")
+                    break
+                }
             }
         } else {
             for _ in 0..<3 {
-                dealOne() // TODO endgame check (not enough cards in deck)
+                if !dealOne() {
+                    print("Deck exhausted!")
+                    break
+                }
             }
         }
         
@@ -161,23 +167,30 @@ struct SetGame {
     
     mutating func replaceMatchedCardsFromDeck() {
         assert(chosenCardsAreAValidSet())
-        for chosenIndex in chosenCardIndices {
-            dealOne(replacingWithMatchedCardAtIndex: chosenIndex)
+        for chosenIndex in chosenCardIndices.sorted().reversed() { // start removing from the biggest index, or else it might mess up with others and cause out of bound errors
+            _ = dealOne(replacingWithMatchedCardAtIndex: chosenIndex)
         }
         
         checkDealtCardsForSetCombinations()
     }
     
-    private mutating func dealOne(replacingWithMatchedCardAtIndex matchedCardIndexToReplace:Int? = nil) {
-        let nextCardFromDeck = deck.removeLast()
+    private mutating func dealOne(replacingWithMatchedCardAtIndex matchedCardIndexToReplace:Int? = nil) -> Bool {
+        let nextCardFromDeck = deck.count > 0 ? deck.removeLast() : nil
         if let replaceIndex = matchedCardIndexToReplace {
-            matchedCards.append(dealtCards.remove(at: replaceIndex))
-            dealtCards.insert(nextCardFromDeck, at: replaceIndex)
+            dealtCards[replaceIndex].isChosen = false
+            matchedCards.append(dealtCards[replaceIndex])
+            if let nextCardThatExists = nextCardFromDeck {
+                dealtCards[replaceIndex] = nextCardThatExists
+            } else {
+                dealtCards.remove(at: replaceIndex)
+            }
         } else {
-            dealtCards.append(nextCardFromDeck)
+            if let nextCardThatExists = nextCardFromDeck {
+                dealtCards.append(nextCardThatExists)
+            }
         }
+        return nextCardFromDeck != nil
     }
-    
     
     struct Card: Identifiable, CustomStringConvertible {
         var isChosen:Bool = false

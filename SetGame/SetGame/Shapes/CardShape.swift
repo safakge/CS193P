@@ -6,28 +6,66 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
+
+
+extension CGImage {
+    static var sharedContext: CIContext?
+    static var sharedFilter = CIFilter.stripesGenerator()
+    
+    static func stripes(colors: (UIColor, UIColor)) -> CGImage {
+        if sharedContext == nil {
+            sharedContext = CIContext()
+            sharedFilter = CIFilter.stripesGenerator()
+        }
+        
+        let width: CGFloat = 100
+        let ratio: CGFloat = 0.25
+        
+        let filter = sharedFilter
+        filter.color0 = CIColor(color: colors.0)
+        filter.color1 = CIColor(color: colors.1)
+        filter.width = Float(width * ratio)
+        filter.center = CGPoint(x: CGFloat(filter.width), y: 0)
+        let size = CGSize(width: width, height: width)
+        let bounds = CGRect(origin: .zero, size: size)
+        
+        let stripesOutput = filter.outputImage!
+        return sharedContext!.createCGImage(stripesOutput, from: bounds)!
+    }
+}
 
 
 struct CardShape: Shape {
     var shapeType:SetGame.Card.CardFeatureShapeType
-    
     var strokeWidth: CGFloat = 3.0
     
     func applySetShapeFeatures(forCard card: SetGame.Card) -> some View {
         var view:AnyView
+        let cardColor = ShapedSetGame.shapeColor(forFeatureValue: card.color)
         switch card.shading {
             case .One:
                 view = AnyView(self.stroke(lineWidth: strokeWidth))
             case .Two:
-                view = AnyView(self.fill().opacity(0.25))
+                view = AnyView(self.fill(CardShape.stripedImagePaint(forColor: UIColor(cardColor))))
             case .Three:
                 view = AnyView(self.fill())
         }
         
-        view = AnyView(view.foregroundColor(ShapedSetGame.shapeColor(forFeatureValue: card.color)))
+        view = AnyView(view.foregroundColor(cardColor))
         
         return view
-        
+    }
+    
+    static var _stripedImagePaintCache:[UIColor:ImagePaint] = [:]
+    static func stripedImagePaint(forColor color: UIColor) -> ImagePaint {
+        if let cached = _stripedImagePaintCache[color] {
+            return cached
+        } else {
+            let imagePaint = ImagePaint(image: Image(decorative: CGImage.stripes(colors: (color, .clear)), scale: 10))
+            _stripedImagePaintCache[color] = imagePaint
+            return imagePaint
+        }
     }
     
     func path(in rect: CGRect) -> Path {

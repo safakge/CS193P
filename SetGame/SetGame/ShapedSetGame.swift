@@ -65,9 +65,9 @@ class ShapedSetGame : ObservableObject {
     // Game Params
     static func shapeColor(forFeatureValue featureValue:SetGame.Card.CardFeatureColor) -> Color {
         switch featureValue {
-            case .One: return .red
-            case .Two: return .blue
-            case .Three: return .purple
+            case .One: return Color(red: 0.34, green: 0.49, blue: 0.36)
+            case .Two: return Color(red: 0.76, green: 0.44, blue: 0.11)
+            case .Three: return Color(red: 0.89, green: 0.40, blue: 0.51)
         }
     }
 }

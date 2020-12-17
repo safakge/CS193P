@@ -1,14 +1,7 @@
 Memorize/Memorize.xcodeproj/xcshareddata/
-Memorize/Memorize.xcodeproj/xcuserdata/safakge.xcuserdatad/xcdebugger/
+Memorize/Memorize.xcodeproj/xcuserdata/safakge.xcuserdatad/
+CS193P.xcworkspace/xcuserdata/safakge.xcuserdatad/
 SetGame/SetGame.xcodeproj/xcuserdata/
 CS193P.xcworkspace/contents.xcworkspacedata
+SetGame/SetGame.xcodeproj/project.pbxproj
 
-## User settings
-xcuserdata/
-
-### Xcode Patch ###
-**/*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-#!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-**/xcshareddata/WorkspaceSettings.xcsettings

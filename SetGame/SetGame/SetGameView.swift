@@ -53,6 +53,7 @@ struct SetGameView: View {
                 .font(.headline)
                 Text(modelView.statsString)
                     .foregroundColor(.secondary)
+                Spacer()
             }
             ModalMessageView(state: modelView.playerProposedAValidSet,
                              successMessage: "It's a set! 🙆‍♀️",

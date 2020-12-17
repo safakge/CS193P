@@ -14,23 +14,27 @@ struct SetGameView: View {
     static var cardFlyAnimation: Animation = Animation.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.75)
     
     var body: some View {
+        let setProposed = modelView.playerProposedAValidSet != nil
+        let proposedSetIsValid = setProposed && modelView.playerProposedAValidSet!
         ZStack {
             VStack {
                 Grid(modelView.dealtCards) { card in
                     CardView(card: card)
                         .aspectRatio(0.75, contentMode: ContentMode.fit)
                         .foregroundColor(card.isChosen ?
-                                            (modelView.playerProposedAValidSet != nil ?
-                                                (modelView.playerProposedAValidSet! ? .green : .red)
+                                            (setProposed ?
+                                                (proposedSetIsValid ? .green : .red)
                                                 : .orange)
                                             : .gray)
                         .onTapGesture {
-                            withAnimation(modelView.playerProposedAValidSet ?? false ? SetGameView.cardFlyAnimation : Animation.interactiveSpring()) {
+                            withAnimation(proposedSetIsValid ? SetGameView.cardFlyAnimation : Animation.interactiveSpring()) {
                                 modelView.choose(card: card)
                             }
                         }
                         .transition(.fly)
-                        .rotationEffect(Angle.degrees(card.isChosen ? Double(card.id%50 - 25) / 5 : 0))
+                        .rotationEffect(Angle.degrees(card.isChosen && !proposedSetIsValid ? Double(card.id%50 - 25) / 5 : 0))
+                        .rotationEffect(Angle.degrees(card.isChosen && proposedSetIsValid ? 360 : 0)) // do a somersault when matched
+                        .animation(.easeInOut(duration: 0.75), value: (card.isChosen && proposedSetIsValid)) // only apply animation if that value changes, (and -I guess- evaluates to true)
                 }
                 Divider()
                 HStack {
